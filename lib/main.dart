@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'Components/Shared/QrScannerComponent.dart';
 import 'Components/Views/Home.dart';
 import 'Components/Views/History.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:synctest/Assets/styles.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -93,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         //rgba(,,,1)
-        backgroundColor: const Color.fromRGBO(30,30,38, 1),
+        backgroundColor: ThemeColors.mainThemeBackground,
         title: Container(
           color: Colors.transparent,
           child: const Center(
@@ -108,14 +109,14 @@ class _MyHomePageState extends State<MyHomePage> {
         child: screens[index],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: const Color.fromRGBO(30,30,38, 1),
-        fixedColor: Colors.redAccent,
-        unselectedItemColor: Colors.white,
+        backgroundColor: ThemeColors.mainThemeBackground,
+        fixedColor: ThemeColors.activeMenu,
+        unselectedItemColor: ThemeColors.mainText,
         currentIndex: index,
-        items: const [
-          BottomNavigationBarItem(label: "Home", icon: Icon(Icons.home, color: Colors.white), activeIcon: Icon(Icons.home, color: Colors.redAccent)),
-          BottomNavigationBarItem(label: "Scan", icon: Icon(Icons.camera_alt, color: Colors.white), activeIcon: Icon(Icons.camera_alt, color: Colors.redAccent)),
-          BottomNavigationBarItem(label: "History", icon: Icon(Icons.history, color: Colors.white), activeIcon: Icon(Icons.history, color: Colors.redAccent)),
+        items:  [
+          BottomNavigationBarItem(label: "Home", icon: Icon(Icons.home, color: ThemeColors.mainText), activeIcon: Icon(Icons.home, color: ThemeColors.activeMenu)),
+          BottomNavigationBarItem(label: "Scan", icon: Icon(Icons.camera_alt, color: ThemeColors.mainText), activeIcon: Icon(Icons.camera_alt, color: ThemeColors.activeMenu)),
+          BottomNavigationBarItem(label: "History", icon: Icon(Icons.history, color: ThemeColors.mainText), activeIcon: Icon(Icons.history, color: ThemeColors.activeMenu)),
         ],
         onTap: (index) => menuItemSelected(index),
       ),

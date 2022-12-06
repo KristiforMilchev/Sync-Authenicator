@@ -1,22 +1,67 @@
 import 'package:flutter/material.dart';
-
+import 'package:synctest/Assets/styles.dart';
+import 'package:synctest/Components/Shared/IconButton.dart';
 
 class ConnectionComponent extends StatelessWidget {
-
-  String url;
-  String email;
-  String currentDate;
-
-  ConnectionComponent({Key? key, required this.url,required this.email, required this.currentDate}) : super(key: key);
+  final String url;
+  final String email;
+  final String currentDate;
+  final bool IsMain;
+  const ConnectionComponent(
+      {Key? key,
+      required this.url,
+      required this.email,
+      required this.currentDate,
+      required this.IsMain})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
     return Column(
-      children:   [
-        Container(margin: const EdgeInsets.fromLTRB(0, 5, 0, 0), child: Text(url, style: const TextStyle(color: Colors.white),)),
-        Container(margin: const EdgeInsets.fromLTRB(0, 5, 0, 0), child: Text(email,  style: const TextStyle(color: Colors.white))),
-        Container(margin: const EdgeInsets.fromLTRB(0, 5, 0, 0), child: const Text("Last sign in date",  style: TextStyle(color: Colors.white))),
-        Container(margin: const EdgeInsets.fromLTRB(0, 5, 0, 0), child: Text(currentDate,  style: const TextStyle(color: Colors.white))),
+      children: [
+
+        if(IsMain)
+          Container(
+            alignment: Alignment.topRight,
+            margin: GeneralTheme.rowTopMargin,
+            child: IconButton(
+                onPressed: (() {}),
+                icon: Icon(Icons.remove_circle, color: ThemeColors.mainText),
+                splashColor: ThemeColors.activeMenu,
+                enableFeedback: true,
+                splashRadius: 10,
+                selectedIcon:
+                    Icon(Icons.remove_circle, color: ThemeColors.activeMenu)),
+          ),
+        Container(
+            margin: GeneralTheme.rowTopMargin,
+            child: Text(
+              url,
+              style: TextStyle(color: ThemeColors.mainText),
+            )),
+        Container(
+            margin: GeneralTheme.rowTopMargin,
+            child: Text(email, style:  TextStyle(color: ThemeColors.mainText))),
+        Container(
+          margin: GeneralTheme.rowInnerTopMargin,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            verticalDirection: VerticalDirection.down,
+            children: [
+              Expanded(
+                  child: Container(
+                      margin: GeneralTheme.rowTopMargin,
+                      child: Text("Last sign in date",
+                          style: TextStyle(color: ThemeColors.innerText)))),
+              Center(
+                  child: Container(
+                      margin: GeneralTheme.rowTopMargin,
+                      child: Text(currentDate,
+                          style: TextStyle(color: ThemeColors.innerText)))),
+            ],
+          ),
+        )
       ],
     );
   }

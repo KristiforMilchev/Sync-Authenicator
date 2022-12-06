@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/home/kristifor/StudioProjects/synctest/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
+            "outputFile": "/home/kristifor/Projects/Sync-Authenicator/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
             "map": [
                 {
                     "source": "/home/kristifor/.gradle/caches/transforms-3/49bc944d29f70d45aa5add8e43e3247e/transformed/jetified-window-1.0.0-beta04/res/values/values.xml",
@@ -73,6 +73,25 @@
                         "startOffsets": "17768",
                         "endColumns": "53",
                         "endOffsets": "17817"
+                    }
+                },
+                {
+                    "source": "/home/kristifor/Projects/Sync-Authenicator/android/app/src/main/res/values/styles.xml",
+                    "from": {
+                        "startLines": "3,14",
+                        "startColumns": "4,4",
+                        "startOffsets": "173,818",
+                        "endLines": "7,16",
+                        "endColumns": "12,12",
+                        "endOffsets": "476,982"
+                    },
+                    "to": {
+                        "startLines": "1430,1435",
+                        "startColumns": "4,4",
+                        "startOffsets": "93038,93346",
+                        "endLines": "1434,1437",
+                        "endColumns": "12,12",
+                        "endOffsets": "93341,93510"
                     }
                 },
                 {
@@ -183,25 +202,6 @@
                         "endLines": "82,83,84,85,86,87,88,89,90,91,281,282,283,284,285,286,287,288,289,323,324,325,326,327,328,329,330,331,332,333,336,337,338,339,1866,3416,3423,3426",
                         "endColumns": "71,60,63,64,64,53,53,53,58,57,46,48,47,41,48,51,57,49,53,65,69,96,116,95,160,112,85,146,98,146,58,46,143,112,10,22,22,22",
                         "endOffsets": "5387,5448,5512,5577,5642,5696,5750,5804,5863,5921,17978,18027,18075,18117,18166,18218,18276,18326,18380,20708,20778,20875,20992,21088,21249,21362,21448,21595,21694,21841,22024,22071,22215,22328,127096,211715,212080,212204"
-                    }
-                },
-                {
-                    "source": "/home/kristifor/StudioProjects/synctest/android/app/src/main/res/values/styles.xml",
-                    "from": {
-                        "startLines": "3,14",
-                        "startColumns": "4,4",
-                        "startOffsets": "173,818",
-                        "endLines": "7,16",
-                        "endColumns": "12,12",
-                        "endOffsets": "476,982"
-                    },
-                    "to": {
-                        "startLines": "1430,1435",
-                        "startColumns": "4,4",
-                        "startOffsets": "93038,93346",
-                        "endLines": "1434,1437",
-                        "endColumns": "12,12",
-                        "endOffsets": "93341,93510"
                     }
                 }
             ]

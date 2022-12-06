@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:synctest/Assets/styles.dart';
 
 
 class CardComponent extends StatelessWidget {
@@ -13,11 +14,11 @@ class CardComponent extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children:  [
         Container(
-          padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-          margin: const EdgeInsets.fromLTRB(5, 5, 5, 5),
-          decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(5)),
-              color: Color.fromRGBO(40, 41, 49, 1)
+          padding: GeneralTheme.boxPadding,
+          margin: GeneralTheme.boxMargin,
+          decoration:  BoxDecoration(
+              borderRadius: GeneralTheme.mainRounding,
+              color: ThemeColors.cardBackground
           ),
           transformAlignment: Alignment.center,
           child: render

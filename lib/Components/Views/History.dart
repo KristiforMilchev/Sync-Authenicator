@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:synctest/Components/History/AuthLogComponent.dart';
 import '/Components/Shared/CardComponent.dart';
 import '/Components/ConnectionComponent.dart';
+import 'package:synctest/Assets/styles.dart';
 
 const List<String> list = <String>['One', 'Two', 'Three', 'Four'];
 
@@ -18,7 +20,7 @@ class _State extends State<HistoryPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color.fromRGBO(30,30,38, 1),
+      color: ThemeColors.mainThemeBackground,
       child: ListView(
         children: [
           Column(
@@ -32,14 +34,14 @@ class _State extends State<HistoryPage> {
                   isExpanded: true,
                   value: dropdownValue,
                   alignment: AlignmentDirectional.centerStart,
-                  icon: const Icon(Icons.arrow_downward, color: Colors.white),
+                  icon:  Icon(Icons.arrow_downward, color: ThemeColors.activeMenu),
                   elevation: 16,
-                  focusColor: Colors.red,
-                  dropdownColor:  const Color.fromRGBO(30,30,38, 1),
-                  style: const TextStyle(color: Colors.white),
+                  focusColor: ThemeColors.activeMenu,
+                  dropdownColor:  ThemeColors.mainThemeBackground,
+                  style: TextStyle(color: ThemeColors.mainText),
                   underline: Container(
                     height: 2,
-                    color: Colors.redAccent,
+                    color: ThemeColors.activeMenu,
                     transformAlignment: AlignmentDirectional.centerStart,
                   ),
                   onChanged: (String? value) {
@@ -64,7 +66,8 @@ class _State extends State<HistoryPage> {
               ),
             ],
           ),
-          CardComponent(render: ConnectionComponent(url: "portal.azure.com", email: "kristifor@collaborativesoft.com", currentDate: "02/12/2022")),
+          const CardComponent(render: ConnectionComponent(url: "portal.azure.com", email: "kristifor@collaborativesoft.com", currentDate: "02/12/2022",IsMain: false)),
+          const AuthLog()
         ],
       ),
     );
