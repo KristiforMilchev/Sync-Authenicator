@@ -28,7 +28,7 @@ class ConnectionComponent extends StatelessWidget {
               alignment: Alignment.topRight,
               margin: GeneralTheme.rowTopMargin,
               child: IconButton(
-                  onPressed: (() {}),
+                  onPressed: (() => _removeItem(1, context)),
                   icon: Icon(Icons.remove_circle, color: ThemeColors.mainText),
                   splashColor: ThemeColors.activeMenu,
                   enableFeedback: true,
@@ -74,8 +74,20 @@ class ConnectionComponent extends StatelessWidget {
       {
         print("object");
         showDialog(context: context, builder: (BuildContext context) {
-          return ApproveDialog(Url: current,);
+          return ApproveDialog(Render: [
+            Center(heightFactor: 1, child: Text('Approve sign in request for:', style:TextStyle(color: ThemeColors.innerText))),
+            Center(heightFactor: 1.9, child: Text(current, style:TextStyle(color: ThemeColors.activeMenu))),
+          ], Title: "Authentication Request");
         });
       }
+  }
+
+  Future<void> _removeItem(index, BuildContext context) async {
+    showDialog(context: context, builder: (BuildContext context) {
+      return ApproveDialog(Render: [
+        Center(heightFactor: 1, child: Text('Are you sure that you want to remove the connection to portal.azure.com', style:TextStyle(color: ThemeColors.innerText))),
+        Center(heightFactor: 1.9, child: Text("Removing the connection will remove all historical data and may cause issues if the url provider doesn't account for the action.", style:TextStyle(color: ThemeColors.activeMenu))),
+      ], Title: "Remove 2FA Connection");
+    });
   }
 }
