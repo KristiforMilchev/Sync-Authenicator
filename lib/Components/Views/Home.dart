@@ -8,16 +8,40 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color.fromRGBO(30,30,38, 1),
+      color: const Color.fromRGBO(30, 30, 38, 1),
       child: ListView(
-
-        children: [
-          CardComponent(render: ConnectionComponent(url: "portal.azure.com", email: "kristifor@collaborativesoft.com", currentDate: "02/12/2022",IsMain: true,)),
-          CardComponent(render: ConnectionComponent(url: "portal.azure.com", email: "kristifor@collaborativesoft.com", currentDate: "02/12/2022",IsMain: true)),
-          CardComponent(render: ConnectionComponent(url: "portal.azure.com", email: "kristifor@collaborativesoft.com", currentDate: "02/12/2022",IsMain: true)),
-          CardComponent(render: ConnectionComponent(url: "portal.azure.com", email: "kristifor@collaborativesoft.com", currentDate: "02/12/2022",IsMain: true)),
-          CardComponent(render: ConnectionComponent(url: "portal.azure.com", email: "kristifor@collaborativesoft.com", currentDate: "02/12/2022",IsMain: true)),
-
+        children: const [
+          CardComponent(
+              render: ConnectionComponent(
+            url: "portal.azure.com",
+            email: "kristifor@collaborativesoft.com",
+            currentDate: "02/12/2022",
+            IsMain: true,
+          )),
+          CardComponent(
+              render: ConnectionComponent(
+                  url: "portal.azure.com",
+                  email: "kristifor@collaborativesoft.com",
+                  currentDate: "02/12/2022",
+                  IsMain: true)),
+          CardComponent(
+              render: ConnectionComponent(
+                  url: "portal.azure.com",
+                  email: "kristifor@collaborativesoft.com",
+                  currentDate: "02/12/2022",
+                  IsMain: true)),
+          CardComponent(
+              render: ConnectionComponent(
+                  url: "portal.azure.com",
+                  email: "kristifor@collaborativesoft.com",
+                  currentDate: "02/12/2022",
+                  IsMain: true)),
+          CardComponent(
+              render: ConnectionComponent(
+                  url: "portal.azure.com",
+                  email: "kristifor@collaborativesoft.com",
+                  currentDate: "02/12/2022",
+                  IsMain: true)),
         ],
       ),
     );
