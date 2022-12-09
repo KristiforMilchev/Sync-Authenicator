@@ -6,8 +6,8 @@ import 'package:synctest/app/router.gr.dart';
 import '../Components/Shared/QrScannerComponent.dart';
 
 class AppRouteViewModel extends BaseViewModel {
-  String _title = "Hello World";
-  int _counter = 0;
+  final String _title = "Hello World";
+  final int _counter = 0;
   int _index = 0;
 
   int get counter => _counter;
@@ -23,8 +23,15 @@ class AppRouteViewModel extends BaseViewModel {
       int currentIndex, AppRouter router, BuildContext context) async {
     if (currentIndex != 1) {
       _index = currentIndex;
-      print("Navigating to");
-      await router.navigateNamed('/home-view');
+
+      switch (currentIndex) {
+        case 0:
+          await router.navigateNamed('/');
+          break;
+        case 2:
+          await router.navigateNamed('/history-view');
+          break;
+      }
       notifyListeners();
     } else {
       Navigator.of(context).push(MaterialPageRoute(

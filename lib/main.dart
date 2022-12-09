@@ -3,7 +3,6 @@ import 'package:stacked/stacked.dart';
 import 'package:synctest/app/app_router_viewmodel.dart';
 import 'package:synctest/ui/views/home/home_view.dart';
 import 'Components/Shared/QrScannerComponent.dart';
-import 'Components/Views/History.dart';
 import 'package:synctest/Assets/styles.dart';
 
 import 'app/router.gr.dart';
