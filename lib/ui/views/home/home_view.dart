@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-import '../../../Components/ConnectionComponent.dart';
-import '../../../Components/Shared/CardComponent.dart';
+import '../components/ConnectionComponent.dart';
+import '../components/shared/CardComponent.dart';
 import 'home_viewmodel.dart';
 
 class HomeView extends StatelessWidget {

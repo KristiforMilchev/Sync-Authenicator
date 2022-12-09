@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:synctest/app/router.gr.dart';
 
-import '../Components/Shared/QrScannerComponent.dart';
+import '../ui/views/components/shared/QrScannerComponent.dart';
 
 class AppRouteViewModel extends BaseViewModel {
   final String _title = "Hello World";
