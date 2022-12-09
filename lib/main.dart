@@ -1,14 +1,26 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:stacked/stacked.dart';
 import 'package:synctest/app/app_router_viewmodel.dart';
 import 'package:synctest/app/locator.dart';
-import 'package:synctest/ui/views/home/home_view.dart';
-import 'ui/views/components/shared/QrScannerComponent.dart';
+
 import 'package:synctest/Assets/styles.dart';
+import 'package:synctest/domain/databases/context_models/auth_connection.dart';
 
 import 'app/router.gr.dart';
 
-void main() {
+void main() async {
+  await Hive.initFlutter();
+  var currentBox = await Hive.openBox("mybox");
+  var box = currentBox;
+  var user = AuthConnection(1, DateTime.now(), "test", true, "test", "dwad");
+  box.put(1, user);
+
+  print(box.get(1));
+
   registerDependency();
   runApp(MyApp());
 }
