@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../Assets/styles.dart';
-import '../../../Components/ConnectionComponent.dart';
-import '../../../Components/History/AuthLogComponent.dart';
-import '../../../Components/Shared/CardComponent.dart';
+import '../components/ConnectionComponent.dart';
+import '../components/history/AuthLogComponent.dart';
+import '../components/shared/CardComponent.dart';
 import 'history_viewcomponent.dart';
 
 class HistoryView extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:synctest/Assets/styles.dart';
-import 'package:synctest/Components/DialogComponent.dart';
-import 'package:synctest/Components/Shared/IconButton.dart';
+import 'package:synctest/ui/views/components/DialogComponent.dart';
+import 'package:synctest/ui/views/components/shared/IconButton.dart';
 
 class ConnectionComponent extends StatelessWidget {
   final String url;
@@ -18,12 +18,11 @@ class ConnectionComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return InkWell(
       onTap: () => InitDialog(url, context),
       child: Column(
         children: [
-          if(IsMain)
+          if (IsMain)
             Container(
               alignment: Alignment.topRight,
               margin: GeneralTheme.rowTopMargin,
@@ -44,7 +43,8 @@ class ConnectionComponent extends StatelessWidget {
               )),
           Container(
               margin: GeneralTheme.rowTopMargin,
-              child: Text(email, style:  TextStyle(color: ThemeColors.mainText))),
+              child:
+                  Text(email, style: TextStyle(color: ThemeColors.mainText))),
           Container(
             margin: GeneralTheme.rowInnerTopMargin,
             child: Row(
@@ -69,25 +69,42 @@ class ConnectionComponent extends StatelessWidget {
     );
   }
 
-  void InitDialog(String current,BuildContext context) {
-      if(IsMain)
-      {
-        print("object");
-        showDialog(context: context, builder: (BuildContext context) {
-          return ApproveDialog(Render: [
-            Center(heightFactor: 1, child: Text('Approve sign in request for:', style:TextStyle(color: ThemeColors.innerText))),
-            Center(heightFactor: 1.9, child: Text(current, style:TextStyle(color: ThemeColors.activeMenu))),
-          ], Title: "Authentication Request");
-        });
-      }
+  void InitDialog(String current, BuildContext context) {
+    if (IsMain) {
+      print("object");
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return ApproveDialog(Render: [
+              Center(
+                  heightFactor: 1,
+                  child: Text('Approve sign in request for:',
+                      style: TextStyle(color: ThemeColors.innerText))),
+              Center(
+                  heightFactor: 1.9,
+                  child: Text(current,
+                      style: TextStyle(color: ThemeColors.activeMenu))),
+            ], Title: "Authentication Request");
+          });
+    }
   }
 
   Future<void> _removeItem(index, BuildContext context) async {
-    showDialog(context: context, builder: (BuildContext context) {
-      return ApproveDialog(Render: [
-        Center(heightFactor: 1, child: Text('Are you sure that you want to remove the connection to portal.azure.com', style:TextStyle(color: ThemeColors.innerText))),
-        Center(heightFactor: 1.9, child: Text("Removing the connection will remove all historical data and may cause issues if the url provider doesn't account for the action.", style:TextStyle(color: ThemeColors.activeMenu))),
-      ], Title: "Remove 2FA Connection");
-    });
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return ApproveDialog(Render: [
+            Center(
+                heightFactor: 1,
+                child: Text(
+                    'Are you sure that you want to remove the connection to portal.azure.com',
+                    style: TextStyle(color: ThemeColors.innerText))),
+            Center(
+                heightFactor: 1.9,
+                child: Text(
+                    "Removing the connection will remove all historical data and may cause issues if the url provider doesn't account for the action.",
+                    style: TextStyle(color: ThemeColors.activeMenu))),
+          ], Title: "Remove 2FA Connection");
+        });
   }
 }

@@ -1,7 +1,7 @@
 import 'package:stacked/stacked.dart';
 
-import '../../../Components/ConnectionComponent.dart';
-import '../../../Components/Shared/CardComponent.dart';
+import '../components/ConnectionComponent.dart';
+import '../components/shared/CardComponent.dart';
 
 class HomeViewModel extends BaseViewModel {
   String _title = "Hello World";
