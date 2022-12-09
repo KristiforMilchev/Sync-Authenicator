@@ -14,8 +14,8 @@
 import 'package:auto_route/auto_route.dart' as _i3;
 import 'package:flutter/material.dart' as _i4;
 
-import '../ui/views/home/home_view.dart' as _i2;
-import '../ui/views/startup/startup_view.dart' as _i1;
+import '../ui/views/history/history_view..dart' as _i2;
+import '../ui/views/home/home_view.dart' as _i1;
 
 class AppRouter extends _i3.RootStackRouter {
   AppRouter([_i4.GlobalKey<_i4.NavigatorState>? navigatorKey])
@@ -23,16 +23,16 @@ class AppRouter extends _i3.RootStackRouter {
 
   @override
   final Map<String, _i3.PageFactory> pagesMap = {
-    StartUp.name: (routeData) {
-      return _i3.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const _i1.StartUp(),
-      );
-    },
     HomeView.name: (routeData) {
       return _i3.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i2.HomeView(),
+        child: const _i1.HomeView(),
+      );
+    },
+    HistoryView.name: (routeData) {
+      return _i3.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i2.HistoryView(),
       );
     },
   };
@@ -40,36 +40,36 @@ class AppRouter extends _i3.RootStackRouter {
   @override
   List<_i3.RouteConfig> get routes => [
         _i3.RouteConfig(
-          StartUp.name,
+          HomeView.name,
           path: '/',
         ),
         _i3.RouteConfig(
-          HomeView.name,
-          path: '/home-view',
+          HistoryView.name,
+          path: '/history-view',
         ),
       ];
 }
 
 /// generated route for
-/// [_i1.StartUp]
-class StartUp extends _i3.PageRouteInfo<void> {
-  const StartUp()
-      : super(
-          StartUp.name,
-          path: '/',
-        );
-
-  static const String name = 'StartUp';
-}
-
-/// generated route for
-/// [_i2.HomeView]
+/// [_i1.HomeView]
 class HomeView extends _i3.PageRouteInfo<void> {
   const HomeView()
       : super(
           HomeView.name,
-          path: '/home-view',
+          path: '/',
         );
 
   static const String name = 'HomeView';
+}
+
+/// generated route for
+/// [_i2.HistoryView]
+class HistoryView extends _i3.PageRouteInfo<void> {
+  const HistoryView()
+      : super(
+          HistoryView.name,
+          path: '/history-view',
+        );
+
+  static const String name = 'HistoryView';
 }

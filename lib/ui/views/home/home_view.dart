@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../../Components/ConnectionComponent.dart';
+import '../../../Components/Shared/CardComponent.dart';
 import 'home_viewmodel.dart';
 
 class HomeView extends StatelessWidget {
@@ -10,12 +12,12 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
-          body: Center(
-              child: Text(
-                  "${model.title.toString()} ${model.counter.toString()}")),
-          floatingActionButton: FloatingActionButton(
-            onPressed: model.updateCounter,
-          )),
+          body: Container(
+        color: const Color.fromRGBO(30, 30, 38, 1),
+        child: ListView(
+          children: model.cards,
+        ),
+      )),
       viewModelBuilder: () => HomeViewModel(),
     );
   }
