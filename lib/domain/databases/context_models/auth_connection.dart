@@ -1,5 +1,6 @@
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:objectbox/objectbox.dart';
+part '../adaptors/auth_connection.g.dart';
 
 @HiveType(typeId: 1)
 class AuthConnection {

@@ -1,5 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:objectbox/objectbox.dart';
+part 'connection_attempt.g.dart';
 
 @HiveType(typeId: 2)
 class ConnectionAttempt {

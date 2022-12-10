@@ -1,10 +1,15 @@
 import 'package:get_it/get_it.dart';
+import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
+import 'package:synctest/application/services/data_repository.dart';
+import 'package:synctest/infrastructure/idata_repository.dart';
 
 //There is also a shortcut (if you don't like it just ignore it):
 GetIt getIt = GetIt.I;
 
-void registerDependency() {}
+void registerDependency() {
+  getIt.registerSingleton<IDataRepository>(DataRepository());
+}
 
 void registerFactory<T>(FactoryFunc<T> func) {
   getIt.registerFactory(() => func);
