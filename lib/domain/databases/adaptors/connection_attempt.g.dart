@@ -1,6 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-
-part of 'connection_attempt.dart';
+part of '../context_models/connection_attempt.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
