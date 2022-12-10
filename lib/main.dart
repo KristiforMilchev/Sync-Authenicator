@@ -1,7 +1,4 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:stacked/stacked.dart';
 import 'package:synctest/app/app_router_viewmodel.dart';
@@ -19,9 +16,8 @@ void main() async {
   var user = AuthConnection(1, DateTime.now(), "test", true, "test", "dwad");
   box.put(1, user);
 
-  print(box.get(1));
-
   registerDependency();
+
   runApp(MyApp());
 }
 

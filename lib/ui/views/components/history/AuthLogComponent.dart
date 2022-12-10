@@ -3,10 +3,16 @@ import 'package:synctest/ui/views/components/shared/CardComponent.dart';
 import 'package:synctest/Assets/styles.dart';
 
 class AuthLog extends StatelessWidget {
-  final String SignedMessage =
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
+  final String? signedMessage;
+  final String? signature;
+  final String? signatureDate;
 
-  const AuthLog({Key? key}) : super(key: key);
+  const AuthLog(
+      {Key? key,
+      required this.signedMessage,
+      required this.signature,
+      required this.signatureDate})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,31 +20,31 @@ class AuthLog extends StatelessWidget {
         render: Column(
       children: [
         Container(
-          child: Text("Message", style: TextStyle(color: ThemeColors.mainText)),
           margin: GeneralTheme.rowTopMargin,
+          child: Text("Message", style: TextStyle(color: ThemeColors.mainText)),
         ),
         Container(
-          child: Text("Peter did not enter the building",
-              style: TextStyle(color: ThemeColors.innerText)),
           margin: GeneralTheme.rowInnerTopMargin,
+          child: Text(signedMessage!,
+              style: TextStyle(color: ThemeColors.innerText)),
         ),
         Container(
+          margin: GeneralTheme.rowTopMargin,
           child: Text("Generated Signature",
               style: TextStyle(color: ThemeColors.mainText)),
-          margin: GeneralTheme.rowTopMargin,
         ),
         Container(
-          child: Text(SignedMessage,
-              style: TextStyle(color: ThemeColors.mainText)),
           margin: GeneralTheme.rowTopMargin,
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
               border: Border.all(
                   color: ThemeColors.innerText,
                   width: 1,
                   style: BorderStyle.solid),
               borderRadius: GeneralTheme.mainRounding,
-              color: Color.fromRGBO(30, 30, 38, 1.0)),
+              color: const Color.fromRGBO(30, 30, 38, 1.0)),
+          child:
+              Text(signature!, style: TextStyle(color: ThemeColors.mainText)),
         ),
         Container(
           margin: GeneralTheme.rowInnerTopMargin,
@@ -54,7 +60,7 @@ class AuthLog extends StatelessWidget {
               Center(
                   child: Container(
                       margin: GeneralTheme.rowTopMargin,
-                      child: Text("12/12/2021",
+                      child: Text(signatureDate!,
                           style: TextStyle(color: ThemeColors.innerText)))),
             ],
           ),

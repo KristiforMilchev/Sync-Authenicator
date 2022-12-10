@@ -1,9 +1,9 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:objectbox/objectbox.dart';
+
 part '../adaptors/auth_connection.g.dart';
 
 @HiveType(typeId: 1)
-class AuthConnection {
+class AuthConnection extends HiveObject {
   @HiveField(0)
   final int id;
   @HiveField(1)

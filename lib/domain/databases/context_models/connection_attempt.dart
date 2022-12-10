@@ -1,9 +1,9 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:objectbox/objectbox.dart';
+
 part '../adaptors/connection_attempt.g.dart';
 
 @HiveType(typeId: 2)
-class ConnectionAttempt {
+class ConnectionAttempt extends HiveObject {
   @HiveField(0)
   int id;
   @HiveField(1)

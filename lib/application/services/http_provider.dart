@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-import 'package:http/retry.dart';
 import 'package:synctest/domain/models/http_request.dart';
 import 'package:synctest/infrastructure/ihttp_provider_service.dart';
 import 'package:http/http.dart' as http;
@@ -24,13 +22,13 @@ class HttpProvider implements IHttpProviderService {
     var result = await http.post(
       Uri.parse(request.url),
       headers: request.headers,
-      body: jsonEncode(request.Params),
+      body: jsonEncode(request.params),
     );
 
     if (result.statusCode == 200) return jsonDecode(result.body);
 
     throw Exception(
-        "Failed to post data ${request.url}  Data: ${request.Params}");
+        "Failed to post data ${request.url}  Data: ${request.params}");
   }
 
   @override
@@ -38,12 +36,12 @@ class HttpProvider implements IHttpProviderService {
     var result = await http.put(
       Uri.parse(request.url),
       headers: request.headers,
-      body: jsonEncode(request.Params),
+      body: jsonEncode(request.params),
     );
 
     if (result.statusCode == 200) return jsonDecode(result.body);
 
     throw Exception(
-        "Failed to put data ${request.url}  Data: ${request.Params}");
+        "Failed to put data ${request.url}  Data: ${request.params}");
   }
 }

@@ -1,14 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:stacked/stacked.dart';
 import 'package:synctest/domain/databases/context_models/auth_connection.dart';
 import 'package:synctest/infrastructure/idata_repository.dart';
 
-import '../components/ConnectionComponent.dart';
-import '../components/shared/CardComponent.dart';
-
 class HomeViewModel extends BaseViewModel {
-  String _title = "Hello World";
+  final String _title = "Hello World";
   List<AuthConnection> _cards = [];
   GetIt getIt = GetIt.instance;
   String get title => _title;

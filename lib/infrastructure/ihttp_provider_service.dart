@@ -1,4 +1,3 @@
-import 'package:synctest/application/services/http_provider.dart';
 import 'package:synctest/domain/models/http_request.dart';
 
 abstract class IHttpProviderService {

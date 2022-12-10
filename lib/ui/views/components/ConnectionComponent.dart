@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:synctest/Assets/styles.dart';
 import 'package:synctest/ui/views/components/DialogComponent.dart';
-import 'package:synctest/ui/views/components/shared/IconButton.dart';
 
 class ConnectionComponent extends StatelessWidget {
-  final String url;
-  final String email;
-  final String currentDate;
+  final String? url;
+  final String? email;
+  final String? currentDate;
   final bool IsMain;
-  const ConnectionComponent(
+  ConnectionComponent(
       {Key? key,
       required this.url,
       required this.email,
@@ -19,7 +18,7 @@ class ConnectionComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => InitDialog(url, context),
+      onTap: () => InitDialog(url!, context),
       child: Column(
         children: [
           if (IsMain)
@@ -38,13 +37,13 @@ class ConnectionComponent extends StatelessWidget {
           Container(
               margin: GeneralTheme.rowTopMargin,
               child: Text(
-                url,
+                url!,
                 style: TextStyle(color: ThemeColors.mainText),
               )),
           Container(
               margin: GeneralTheme.rowTopMargin,
               child:
-                  Text(email, style: TextStyle(color: ThemeColors.mainText))),
+                  Text(email!, style: TextStyle(color: ThemeColors.mainText))),
           Container(
             margin: GeneralTheme.rowInnerTopMargin,
             child: Row(
@@ -59,7 +58,7 @@ class ConnectionComponent extends StatelessWidget {
                 Center(
                     child: Container(
                         margin: GeneralTheme.rowTopMargin,
-                        child: Text(currentDate,
+                        child: Text(currentDate!,
                             style: TextStyle(color: ThemeColors.innerText)))),
               ],
             ),

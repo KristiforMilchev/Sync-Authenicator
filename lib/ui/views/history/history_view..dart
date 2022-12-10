@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:synctest/domain/databases/context_models/auth_connection.dart';
 
 import '../../../Assets/styles.dart';
 import '../components/ConnectionComponent.dart';
@@ -16,15 +17,15 @@ class HistoryView extends StatelessWidget {
       builder: (context, model, child) => Scaffold(
         body: Container(
           color: ThemeColors.mainThemeBackground,
-          child: ListView(
-            children: [
+          child: ListView(children: [
+            Column(mainAxisAlignment: MainAxisAlignment.start, children: [
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Container(
                     width: 300,
                     transformAlignment: AlignmentDirectional.centerStart,
-                    child: DropdownButton<String>(
+                    child: DropdownButton<AuthConnection>(
                       isExpanded: true,
                       value: model.selectedProvider,
                       alignment: AlignmentDirectional.centerStart,
@@ -39,15 +40,16 @@ class HistoryView extends StatelessWidget {
                         color: ThemeColors.activeMenu,
                         transformAlignment: AlignmentDirectional.centerStart,
                       ),
-                      onChanged: (String? value) =>
+                      onChanged: (AuthConnection? value) =>
                           model.dropdownValueChanged(value),
                       items: model.providers
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
+                          .map<DropdownMenuItem<AuthConnection>>(
+                              (AuthConnection value) {
+                        return DropdownMenuItem<AuthConnection>(
                           value: value,
                           child: Center(
                             child: Text(
-                              value,
+                              value.url,
                               textAlign: TextAlign.center,
                             ),
                           ),
@@ -57,18 +59,35 @@ class HistoryView extends StatelessWidget {
                   ),
                 ],
               ),
-              const CardComponent(
-                  render: ConnectionComponent(
-                      url: "portal.azure.com",
-                      email: "kristifor@collaborativesoft.com",
-                      currentDate: "02/12/2022",
-                      IsMain: false)),
-              const AuthLog()
-            ],
-          ),
+              if (model.selectedProvider != null)
+                Container(
+                  alignment: Alignment.topCenter,
+                  child: CardComponent(
+                      render: ConnectionComponent(
+                          url: model.selectedProvider?.url,
+                          email: model.selectedProvider?.email,
+                          currentDate: model.selectedProvider?.createdAt
+                              .toIso8601String(),
+                          IsMain: false)),
+                ),
+            ]),
+            Container(
+              height: 500,
+              child: ListView.builder(
+                  itemCount: model.connectionAttempts.length,
+                  itemBuilder: (context, index) {
+                    var current = model.connectionAttempts.elementAt(index);
+                    return AuthLog(
+                        signedMessage: current.message,
+                        signature: current.signature,
+                        signatureDate: current.date.toIso8601String());
+                  }),
+            ),
+          ]),
         ),
       ),
       viewModelBuilder: () => HistoryViewModel(),
+      onModelReady: (viewModel) => viewModel.initialise(),
     );
   }
 }

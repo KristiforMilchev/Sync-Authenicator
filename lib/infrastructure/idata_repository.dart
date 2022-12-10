@@ -1,4 +1,3 @@
-import 'package:objectbox/objectbox.dart';
 import 'package:synctest/domain/databases/context_models/auth_connection.dart';
 import 'package:synctest/domain/databases/context_models/connection_attempt.dart';
 
