@@ -1,6 +1,11 @@
-class UserWallet {
-  String privateKey;
-  String publicAddress;
+import 'package:equatable/equatable.dart';
 
-  UserWallet(this.privateKey, this.publicAddress);
+class UserWallet extends Equatable {
+  final String privateKey;
+  final String publicAddress;
+
+  const UserWallet(this.privateKey, this.publicAddress);
+
+  @override
+  List<Object?> get props => [privateKey, publicAddress];
 }

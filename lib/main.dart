@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:stacked/stacked.dart';
-import 'package:synctest/app/app_router_viewmodel.dart';
-import 'package:synctest/app/locator.dart';
 
 import 'package:synctest/Assets/styles.dart';
 import 'package:synctest/domain/databases/context_models/auth_connection.dart';
 
-import 'app/router.gr.dart';
+import 'application/app_router_viewmodel.dart';
+import 'application/locator.dart';
+import 'application/router.gr.dart';
 
 void main() async {
   await Hive.initFlutter();

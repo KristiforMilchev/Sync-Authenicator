@@ -9,7 +9,7 @@ import 'dart:math'; //used for the random number generator
 import 'package:web3dart/web3dart.dart';
 import '../../infrastructure/iblockchain_provider.dart';
 
-class Blockchainprovidr implements IBlokchainProvider {
+class Blockchainprovider implements IBlokchainProvider {
   @override
   Credentials createNewAccount() {
     // Or generate a new key randomly
@@ -34,36 +34,30 @@ class Blockchainprovidr implements IBlokchainProvider {
   }
 
   @override
-  String decodeSigned(String message, UserWallet wallet) {
+  String decodeSigned(String signature, String plainMessage) {
     var converter = Converters();
-    var currentMessage = converter.convertStringToUint8List(message);
+    var currentMessage = converter.convertStringToUint8List(plainMessage);
 
     return EthSigUtil.recoverSignature(
-        signature: wallet.privateKey, message: currentMessage);
+        signature: signature, message: currentMessage);
   }
 
   @override
   UserWallet getAccount(String encryptionKey, Encrypted password) {
     final key = Key.fromUtf8(encryptionKey);
     final iv = IV.fromLength(16);
-
     final encrypter = Encrypter(AES(key));
-
     final decrypted = encrypter.decrypt(password, iv: iv);
-
-    print(decrypted);
     var credentials = recoverAccount(decrypted);
 
-    return UserWallet(credentials.address.toString(), decrypted);
+    return UserWallet(decrypted, credentials.address.toString());
   }
 
   @override
   Encrypted encryptPk(String ecncryptionKey, String password) {
     final key = Key.fromUtf8(ecncryptionKey);
     final iv = IV.fromLength(16);
-
     final encrypter = Encrypter(AES(key));
-
     final encrypted = encrypter.encrypt(password, iv: iv);
 
     return encrypted;
