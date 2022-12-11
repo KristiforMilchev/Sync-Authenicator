@@ -8,5 +8,5 @@ abstract class IBlokchainProvider {
   UserWallet getAccount(String encryptionKey, Encrypted password);
   Encrypted encryptPk(String ecncryptionKey, String password);
   String signData(String message, UserWallet activeWallet);
-  String decodeSigned(String message, UserWallet wallet);
+  String decodeSigned(String signature, String plainMessage);
 }
