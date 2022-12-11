@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 
+import '../ui/views/Setup/setup_view.dart';
 import '../ui/views/history/history_view..dart';
 import '../ui/views/home/home_view.dart';
 
@@ -8,6 +9,7 @@ import '../ui/views/home/home_view.dart';
   routes: <AutoRoute>[
     AutoRoute(page: HomeView, initial: true),
     AutoRoute(page: HistoryView),
+    AutoRoute(page: SetupView),
   ],
 )
 // extend the generated private router
