@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:synctest/app/router.gr.dart';
+
+import 'package:synctest/application/router.gr.dart';
 
 import '../ui/views/components/shared/QrScannerComponent.dart';
 
