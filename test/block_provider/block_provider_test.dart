@@ -11,12 +11,9 @@ import '../core/test_data.dart';
 
 void main() {
   late final IBlokchainProvider provider;
-
-  setUp(() {
-    var getIt = GetIt.asNewInstance();
-    getIt.registerSingleton<IBlokchainProvider>(Blockchainprovider());
-    provider = getIt.get<IBlokchainProvider>();
-  });
+  var getIt = GetIt.asNewInstance();
+  getIt.registerSingleton<IBlokchainProvider>(Blockchainprovider());
+  provider = getIt.get<IBlokchainProvider>();
 
   group('BlockProviderTest -', () {
     group('Account Handling -', () {

@@ -8,5 +8,6 @@ abstract class IDataRepository<T> {
   Future<List<ConnectionAttempt>> getConnectionAttemptsByAuthId(int id);
   Future<bool> addConnection(AuthConnection connection);
   Future<bool> removeConnection(int id);
+  Future<bool> removeConnectionAttempt(int id);
   Future<bool> addConnectionAttempt(ConnectionAttempt connection);
 }
