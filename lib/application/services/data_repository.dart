@@ -6,7 +6,7 @@ import 'package:synctest/domain/databases/context_models/connection_attempt.dart
 import 'package:synctest/infrastructure/idata_repository.dart';
 import 'package:synctest/infrastructure/idatabase_context.dart';
 
-class DataRepository<T> implements IDataRepository {
+class DataRepository implements IDataRepository {
   GetIt getIt = GetIt.instance;
   late IDatabaseContext _context;
 
@@ -18,6 +18,19 @@ class DataRepository<T> implements IDataRepository {
   @override
   Future<bool> addConnection(AuthConnection connection) async {
     var box = await _context.create();
+    var exists = box.values.whereType<AuthConnection?>().singleWhere(
+      (element) => element?.id == connection.id,
+      orElse: () {
+        return;
+      },
+    );
+
+    //Check if item of the same ID exists
+    if (exists != null) {
+      box.close();
+      return false;
+    }
+
     box.add(connection);
 
     box.close();
@@ -59,12 +72,22 @@ class DataRepository<T> implements IDataRepository {
   @override
   Future<bool> removeConnection(int id) async {
     var box = await _context.create();
-    var getById = await getConnectionsById(id);
-    if (getById == null) return false;
 
-    await box.delete(id);
+    var connection = box.values.whereType<AuthConnection?>().singleWhere(
+      (element) => element?.id == id,
+      orElse: () {
+        return;
+      },
+    );
 
+    if (connection == null) {
+      box.close();
+      return false;
+    }
+
+    await connection.delete();
     box.close();
+
     return true;
   }
 
@@ -90,7 +113,41 @@ class DataRepository<T> implements IDataRepository {
   Future<bool> addConnectionAttempt(ConnectionAttempt connection) async {
     var box = await _context.create();
 
+    var exists = box.values.whereType<ConnectionAttempt?>().singleWhere(
+      (element) => element?.id == connection.id,
+      orElse: () {
+        return;
+      },
+    );
+
+    //Check if item of the same ID exists
+    if (exists != null) {
+      box.close();
+      return false;
+    }
+
     box.add(connection);
+    box.close();
+    return true;
+  }
+
+  @override
+  Future<bool> removeConnectionAttempt(int id) async {
+    var box = await _context.create();
+    var connection = box.values.whereType<ConnectionAttempt?>().singleWhere(
+      (element) => element?.id == id,
+      orElse: () {
+        return;
+      },
+    );
+
+    if (connection == null) {
+      box.close();
+      return false;
+    }
+
+    await connection.delete();
+
     box.close();
     return true;
   }
