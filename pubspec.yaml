@@ -49,6 +49,9 @@ dependencies:
   objectbox_flutter_libs: any
   hive: ^2.2.3
   hive_flutter: ^1.1.0
+  web3dart: ^2.5.1
+  encrypt: ^5.0.1
+  eth_sig_util: ^0.0.9
 
 dev_dependencies:
   flutter_test:
