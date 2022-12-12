@@ -1,3 +1,4 @@
+import 'package:synctest/domain/databases/context_models/auth_connection.dart';
 import 'package:synctest/domain/models/user_wallet.dart';
 import 'package:web3dart/web3dart.dart';
 
@@ -14,6 +15,15 @@ class TestsData {
       "0xb4daaf4cd98d7acf1eb36d52aa34ab8ce9eb7c0d4377b76ec357c96339ff735d50cf1133d174914a91f682f90f08254e03527a3cbd820a5b12914f8cfdc6868f1b";
 
   String testMessage = "Test message";
+
+  List<AuthConnection> connections = [
+    AuthConnection(111, DateTime.now(), "jorge@contoso.com", true, "asdasdaa",
+        "https://contoso.com"),
+    AuthConnection(112, DateTime.now(), "soros@contoso.com", true, "asdasdaa",
+        "https://bank.com"),
+    AuthConnection(113, DateTime.now(), "peter@contoso.com", true, "asdasdaa",
+        "https://account.com"),
+  ];
 
   UserWallet initTestWallet() {
     return UserWallet(privateKey, publicKey);

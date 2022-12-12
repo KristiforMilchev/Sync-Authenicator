@@ -9,7 +9,8 @@ GetIt getIt = GetIt.I;
 
 void registerDependency() {
   getIt.registerSingleton<IDatabaseContext>(DatabaseContext());
-  getIt.registerSingleton<IDataRepository>(DataRepository());
+  getIt.registerSingleton<IDataRepository>(
+      DataRepository("sync-auth-production"));
 }
 
 void registerFactory<T>(FactoryFunc<T> func) {

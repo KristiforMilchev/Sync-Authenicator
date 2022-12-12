@@ -18,7 +18,7 @@ class UserSettingsAdapter extends TypeAdapter<UserSettings> {
     };
     return UserSettings(
       fields[0] as String,
-      fields[1] as Encrypted,
+      fields[1] as String,
       fields[2] as DateTime,
     );
   }
