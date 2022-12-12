@@ -4,8 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:synctest/Assets/styles.dart';
-import 'package:synctest/main.dart';
-
+import 'package:synctest/ui/views/components/home/qr_auth_panel/qr_auth_panel.dart';
 
 class QRViewExample extends StatefulWidget {
   const QRViewExample({Key? key}) : super(key: key);
@@ -38,89 +37,10 @@ class _QRViewExampleState extends State<QRViewExample> {
         child: Column(
           children: <Widget>[
             Expanded(flex: 4, child: _buildQrView(context)),
-            Expanded(
-              flex: 1,
-              child: FittedBox(
-                fit: BoxFit.contain,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    if (result != null)
-                      Text(
-                          'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}', style: TextStyle(color: ThemeColors.mainText),)
-                    else
-                        Text('Scan a code',  style: TextStyle(color: ThemeColors.mainText),),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                          margin: const EdgeInsets.all(8),
-                          child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateColor.resolveWith((states) => ThemeColors.cardBackground),
-                                foregroundColor: MaterialStateColor.resolveWith((states) => ThemeColors.mainText),
-
-                              ),
-                              onPressed: () async {
-                                  Navigator.pop(context);
-                              },
-                              child: FutureBuilder(
-                                 builder: (context, snapshot) {
-                                  return Text('Cancel', style: TextStyle(fontSize: 8),);
-                                },
-                              )),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.all(8),
-                          child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateColor.resolveWith((states) => ThemeColors.cardBackground),
-                                foregroundColor: MaterialStateColor.resolveWith((states) => ThemeColors.mainText),
-
-                              ),
-                              onPressed: () async {
-                                await controller?.toggleFlash();
-                                setState(() {});
-                              },
-                              child: FutureBuilder(
-                                future: controller?.getFlashStatus(),
-                                builder: (context, snapshot) {
-                                  return Text('Flash: ${snapshot.data}', style: TextStyle(fontSize: 8),);
-                                },
-                              )),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.all(8),
-                          child: ElevatedButton(
-                              style: ButtonStyle(
-                                  backgroundColor: MaterialStateColor.resolveWith((states) => ThemeColors.cardBackground),
-                                  foregroundColor: MaterialStateColor.resolveWith((states) => ThemeColors.mainText),
-
-                              ),
-                              onPressed: () async {
-                                await controller?.flipCamera();
-                                setState(() {});
-                              },
-                              child: FutureBuilder(
-                                future: controller?.getCameraInfo(),
-                                builder: (context, snapshot) {
-                                  if (snapshot.data != null) {
-                                    return Text(
-                                        'Camera facing ${describeEnum(snapshot.data!)}',
-                                        style: const TextStyle(fontSize: 8)
-                                      ,);
-                                  } else {
-                                    return const Text('loading', style: TextStyle(fontSize: 8),);
-                                  }
-                                },
-                              )),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ),
+            QrAuthPanel(
+              key: const Key("qrPanel"),
+              currentController: controller,
+              currentResult: result,
             )
           ],
         ),
@@ -131,7 +51,7 @@ class _QRViewExampleState extends State<QRViewExample> {
   Widget _buildQrView(BuildContext context) {
     // For this example we check how width or tall the device is and change the scanArea and overlay accordingly.
     var scanArea = (MediaQuery.of(context).size.width < 400 ||
-        MediaQuery.of(context).size.height < 400)
+            MediaQuery.of(context).size.height < 400)
         ? 150.0
         : 300.0;
     // To ensure the Scanner view is properly sizes after rotation
@@ -157,6 +77,7 @@ class _QRViewExampleState extends State<QRViewExample> {
       setState(() {
         result = scanData;
       });
+      Navigator.pop(context, result!.code);
     });
   }
 

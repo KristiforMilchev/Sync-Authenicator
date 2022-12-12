@@ -3,7 +3,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:stacked/stacked.dart';
 
 import 'package:synctest/Assets/styles.dart';
-import 'package:synctest/domain/databases/context_models/auth_connection.dart';
 
 import 'application/app_router_viewmodel.dart';
 import 'application/locator.dart';
@@ -11,10 +10,6 @@ import 'application/router.gr.dart';
 
 void main() async {
   await Hive.initFlutter();
-  var currentBox = await Hive.openBox("mybox");
-  var box = currentBox;
-  var user = AuthConnection(1, DateTime.now(), "test", true, "test", "dwad");
-  box.put(1, user);
 
   registerDependency();
 
@@ -26,10 +21,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: ViewModelBuilder<AppRouteViewModel>.reactive(
-          builder: (context, model, child) => Scaffold(
+    return ViewModelBuilder<AppRouteViewModel>.reactive(
+      builder: (context, model, child) {
+        if (model.isConfigured) {
+          return Scaffold(
             appBar: AppBar(
               // Here we take the value from the MyHomePage object that was created by
               // the App.build method, and use it to set our appbar title.
@@ -76,8 +71,17 @@ class MyApp extends StatelessWidget {
               onTap: (index) =>
                   model.menuItemSelected(index, _appRouter, context),
             ),
-          ),
-          viewModelBuilder: () => AppRouteViewModel(),
-        ));
+          );
+        } else {
+          return MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            routerDelegate: _appRouter.delegate(),
+            routeInformationParser: _appRouter.defaultRouteParser(),
+          );
+        }
+      },
+      viewModelBuilder: () => AppRouteViewModel(),
+      onModelReady: (model) => model.initialized(_appRouter),
+    );
   }
 }

@@ -54,6 +54,7 @@ dependencies:
   eth_sig_util: ^0.0.9
   mockito: ^5.3.2
   equatable: ^2.0.5
+  flutter_linkify: ^5.0.2
 
 dev_dependencies:
   flutter_test:

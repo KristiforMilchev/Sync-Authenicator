@@ -142,6 +142,10 @@ flat_buffers
 2.12
 file:///home/kristifor/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flat_buffers-2.0.5/
 file:///home/kristifor/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flat_buffers-2.0.5/lib/
+flutter_linkify
+2.12
+file:///home/kristifor/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_linkify-5.0.2/
+file:///home/kristifor/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_linkify-5.0.2/lib/
 flutter_lints
 2.17
 file:///home/kristifor/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_lints-2.0.1/
@@ -210,6 +214,10 @@ json_rpc_2
 2.12
 file:///home/kristifor/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/json_rpc_2-3.0.2/
 file:///home/kristifor/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/json_rpc_2-3.0.2/lib/
+linkify
+2.12
+file:///home/kristifor/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/linkify-4.1.0/
+file:///home/kristifor/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/linkify-4.1.0/lib/
 lints
 2.17
 file:///home/kristifor/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/lints-2.0.1/
