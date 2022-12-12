@@ -3,6 +3,7 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:synctest/domain/databases/context_models/connection_attempt.dart';
+import 'package:synctest/domain/databases/context_models/user_settings.dart';
 import 'package:synctest/infrastructure/idatabase_context.dart';
 import 'context_models/auth_connection.dart';
 
@@ -18,6 +19,8 @@ class DatabaseContext implements IDatabaseContext {
       Hive.registerAdapter(AuthConnectionAdapter());
     if (!Hive.isAdapterRegistered(2))
       Hive.registerAdapter(ConnectionAttemptAdapter());
+    if (!Hive.isAdapterRegistered(3))
+      Hive.registerAdapter(UserSettingsAdapter());
 
     if (!Hive.isBoxOpen("SyncAuthDb"))
       box = await Hive.openBox("SyncAuthDb");
