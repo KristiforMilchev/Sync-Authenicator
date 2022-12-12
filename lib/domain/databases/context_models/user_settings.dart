@@ -7,7 +7,7 @@ class UserSettings extends HiveObject {
   @HiveField(0)
   String address;
   @HiveField(1)
-  Encrypted pk;
+  String pk;
   @HiveField(2)
   DateTime dateTime;
 

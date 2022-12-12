@@ -11,7 +11,7 @@ void main() {
   late final IDataRepository repository;
   var getIt = GetIt.instance;
   getIt.registerSingleton<IDatabaseContext>(DatabaseContext());
-  getIt.registerSingleton<IDataRepository>(DataRepository());
+  getIt.registerSingleton<IDataRepository>(DataRepository("sync-auth-debug"));
   repository = getIt.get<IDataRepository>();
 
   group('DataRepositoryTests -', () {
@@ -73,7 +73,7 @@ void main() {
     });
 
     test("GetConnectionAttemptsByAuthId", () async {
-      var connections = await repository.getConnectionAttemptsByAuthId(991);
+      var connections = await repository.getConnectionAttemptsByAuthId(999991);
 
       expect(connections, isNot(null),
           reason:

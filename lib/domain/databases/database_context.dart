@@ -11,7 +11,7 @@ class DatabaseContext implements IDatabaseContext {
   late Box _box;
 
   @override
-  Future<Box> create() async {
+  Future<Box> create(String database) async {
     final Box box;
 
     await Hive.initFlutter();
@@ -22,10 +22,10 @@ class DatabaseContext implements IDatabaseContext {
     if (!Hive.isAdapterRegistered(3))
       Hive.registerAdapter(UserSettingsAdapter());
 
-    if (!Hive.isBoxOpen("SyncAuthDb"))
-      box = await Hive.openBox("SyncAuthDb");
+    if (!Hive.isBoxOpen(database))
+      box = await Hive.openBox(database);
     else
-      box = Hive.box("SyncAuthDb");
+      box = Hive.box(database);
 
     return box;
   }

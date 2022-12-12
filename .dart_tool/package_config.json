@@ -218,6 +218,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "flutter_linkify",
+      "rootUri": "file:///home/kristifor/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_linkify-5.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_lints",
       "rootUri": "file:///home/kristifor/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_lints-2.0.1",
       "packageUri": "lib/",
@@ -328,6 +334,12 @@
     {
       "name": "json_rpc_2",
       "rootUri": "file:///home/kristifor/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/json_rpc_2-3.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "linkify",
+      "rootUri": "file:///home/kristifor/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/linkify-4.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -686,7 +698,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2022-12-11T12:22:18.658716Z",
+  "generated": "2022-12-12T11:15:03.110593Z",
   "generator": "pub",
   "generatorVersion": "2.18.5"
 }
