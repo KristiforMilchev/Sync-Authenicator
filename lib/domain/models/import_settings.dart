@@ -12,8 +12,8 @@ class ImportSettings {
       : userSettings = json['userSettings'],
         connections = json['connections'];
 
-  Map<String, dynamic> toJson() => {
-        'userSettings': userSettings,
-        'connections': connections,
-      };
+  Map<String, dynamic> toJson() {
+    List<Map> conn = connections.map((i) => i.toJson()).toList();
+    return {'userSettings': userSettings.toJson(), 'connections': conn};
+  }
 }

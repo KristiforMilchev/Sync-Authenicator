@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 
 import 'package:get_it/get_it.dart';
 import 'package:stacked/stacked.dart';
+import 'package:synctest/domain/databases/context_models/auth_connection.dart';
 
 import 'package:synctest/domain/models/import_settings.dart';
 import 'package:synctest/infrastructure/iblockchain_provider.dart';
 import 'package:synctest/infrastructure/iconfig_manager.dart';
 import 'package:synctest/infrastructure/ipage_router_service.dart';
 
-import '../../../application/converters/converters.dart';
 import '../../../domain/databases/context_models/user_settings.dart';
 import '../../../domain/general_config.dart';
 import '../components/shared/QrScannerComponent.dart';
@@ -35,7 +35,7 @@ class SetupViewModel extends BaseViewModel {
   ) async {
     switch (action) {
       //Import existing account
-      case 0:
+      case 2:
         final result = await Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => const QRViewExample(),
         ));
@@ -43,17 +43,20 @@ class SetupViewModel extends BaseViewModel {
         break;
 
       //Create new account
-      case 2:
+      case 0:
         createNewAccount();
         break;
     }
   }
 
   void importAccount(String result) {
-    Map<String, dynamic> settingsMap = jsonDecode(result);
-    var parse = ImportSettings.fromJson(settingsMap);
-    if (parse.userSettings.address.isNotEmpty) {
-      configManager.importConfiguration(parse.userSettings, parse.connections);
+    var map = json.encode(result);
+
+    var parsedString = json.decode(map);
+
+    if (parsedString.userSettings.address.isNotEmpty) {
+      configManager.importConfiguration(
+          parsedString.userSettings, parsedString.connections);
     }
     router.changePage("/home-view");
   }
