@@ -80,3 +80,5 @@ pubspec.lock
 .debug/*
 .build/*
 .flutter-plugins-dependencies
+.dart_tool/package_config.json
+.flutter-plugins-dependencies
