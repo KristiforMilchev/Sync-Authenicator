@@ -20,6 +20,23 @@ class AuthConnection extends HiveObject {
   AuthConnection(this.id, this.createdAt, this.email, this.isEnabled,
       this.registerHash, this.url);
 
+  AuthConnection.fromJson(Map<String, dynamic> json)
+      : id = json['id'],
+        url = json['url'],
+        email = json['email'],
+        registerHash = json['registerHash'],
+        isEnabled = json['isEnabled'],
+        createdAt = json['createdAt'];
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'url': url,
+        'email': email,
+        'registerHash': registerHash,
+        'isEnabled': isEnabled,
+        'createdAt': createdAt.toString()
+      };
+
   @override
   String toString() {
     return '$url: $email';
