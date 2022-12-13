@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:eth_sig_util/util/utils.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get_it/get_it.dart';
@@ -10,6 +11,9 @@ import 'package:synctest/infrastructure/iblockchain_provider.dart';
 import 'package:synctest/infrastructure/iconfig_manager.dart';
 import 'package:synctest/infrastructure/ipage_router_service.dart';
 
+import '../../../application/converters/converters.dart';
+import '../../../domain/databases/context_models/user_settings.dart';
+import '../../../domain/general_config.dart';
 import '../components/shared/QrScannerComponent.dart';
 
 class SetupViewModel extends BaseViewModel {
@@ -56,12 +60,12 @@ class SetupViewModel extends BaseViewModel {
 
   void createNewAccount() async {
     var getNewAccount = blockchainProvider.createNewAccount();
-    // var encryptKey = blockchainProvider.encryptPk(
-    //     Converters().convertUint8ListToString(getNewAccount.privateKey),
-    //     GeneralConfig.encPassword);
-    // var publicAddress = getNewAccount.address.hex;
-    // configManager.addNewConfig(
-    //     UserSettings(publicAddress, encryptKey.base64, DateTime.now()));
+    var pk = bytesToHex(getNewAccount.privateKey);
+    var encryptKey =
+        blockchainProvider.encryptPk(GeneralConfig.encPassword, pk);
+    var publicAddress = getNewAccount.address.hex;
+    configManager.addNewConfig(
+        UserSettings(publicAddress, encryptKey.base64, DateTime.now()));
     await router.changePage("/home-view");
   }
 }
