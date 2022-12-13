@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:synctest/domain/databases/context_models/auth_connection.dart';
+import 'package:synctest/ui/views/components/shared/bottom_bar/bottom_bar.dart';
 
 import '../../../Assets/styles.dart';
 import '../components/ConnectionComponent.dart';
 import '../components/history/AuthLogComponent.dart';
 import '../components/shared/CardComponent.dart';
+import '../components/shared/application_bar.dart';
 import 'history_viewcomponent.dart';
 
 class HistoryView extends StatelessWidget {
@@ -15,6 +17,9 @@ class HistoryView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<HistoryViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
+        appBar: PreferredSize(
+            preferredSize: Size(MediaQuery.of(context).size.width, 60),
+            child: const ApplicationBar()),
         body: Container(
           color: ThemeColors.mainThemeBackground,
           child: ListView(children: [
@@ -85,6 +90,7 @@ class HistoryView extends StatelessWidget {
             ),
           ]),
         ),
+        bottomNavigationBar: const BottomBar(),
       ),
       viewModelBuilder: () => HistoryViewModel(),
       onModelReady: (viewModel) => viewModel.initialise(),

@@ -14,7 +14,7 @@ class GeneralTheme {
   static EdgeInsets boxMargin = const EdgeInsets.fromLTRB(5, 5, 5, 5);
   static EdgeInsets rowTopMargin = const EdgeInsets.fromLTRB(0, 5, 0, 0);
   static EdgeInsets rowInnerTopMargin = const EdgeInsets.fromLTRB(0, 10, 0, 0);
-  static TextStyle setuph2 = TextStyle(
+  static TextStyle setupP = TextStyle(
     color: ThemeColors.innerText,
     decoration: TextDecoration.none,
     fontStyle: FontStyle.italic,

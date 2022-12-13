@@ -1,59 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:stacked/stacked.dart';
-
 import 'package:synctest/application/router.gr.dart';
+import 'package:synctest/infrastructure/ipage_router_service.dart';
 
 import '../infrastructure/iconfig_manager.dart';
-import '../ui/views/components/shared/QrScannerComponent.dart';
 
 class AppRouteViewModel extends BaseViewModel {
   GetIt getIt = GetIt.instance;
+  late IPageRouterService routerService;
+  late MaterialApp _app;
 
-  bool _isConfigured = false;
-  final String _title = "Hello World";
-  final int _counter = 0;
-  int _index = 0;
-
-  int get counter => _counter;
-  String get title => _title;
+  bool _isConfigured = true;
   bool get isConfigured => _isConfigured;
-
-  get index => _index;
-
-  void updateCounter() {
-    notifyListeners();
-  }
-
-  menuItemSelected(
-      int currentIndex, AppRouter router, BuildContext context) async {
-    if (currentIndex != 1) {
-      _index = currentIndex;
-
-      switch (currentIndex) {
-        case 0:
-          await router.navigateNamed('/');
-          break;
-        case 2:
-          await router.navigateNamed('/history-view');
-          break;
-      }
-      notifyListeners();
-    } else {
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => const QRViewExample(),
-      ));
-    }
-  }
+  MaterialApp get app => _app;
 
   initialized(AppRouter router) async {
+    _app = initApp(router);
     var configManager = getIt.get<IConfigManager>();
     var configResult = await configManager.isConfigured();
+    routerService = getIt.get<IPageRouterService>();
+    routerService.registerRouter(router, this, _app);
 
+    notifyListeners();
     if (configResult) {
       _isConfigured = true;
+      // ignore: use_build_context_synchronously
       notifyListeners();
-      await router.navigate(const HomeView());
+      //routerService;
+      await routerService.changePage("/home-view");
     }
+  }
+
+  MaterialApp initApp(AppRouter router) {
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      routerDelegate: router.delegate(),
+      routeInformationParser: router.defaultRouteParser(),
+    );
   }
 }

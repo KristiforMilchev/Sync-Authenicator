@@ -11,7 +11,7 @@ import '../../infrastructure/iblockchain_provider.dart';
 
 class Blockchainprovider implements IBlokchainProvider {
   @override
-  Credentials createNewAccount() {
+  EthPrivateKey createNewAccount() {
     // Or generate a new key randomly
     var rng = Random.secure();
     var credentials = EthPrivateKey.createRandom(rng);

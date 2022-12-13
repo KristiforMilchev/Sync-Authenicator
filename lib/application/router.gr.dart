@@ -16,7 +16,7 @@ import 'package:flutter/material.dart' as _i5;
 
 import '../ui/views/history/history_view..dart' as _i3;
 import '../ui/views/home/home_view.dart' as _i2;
-import '../ui/views/Setup/setup_view.dart' as _i1;
+import '../ui/views/setup/setup_view.dart' as _i1;
 
 class AppRouter extends _i4.RootStackRouter {
   AppRouter([_i5.GlobalKey<_i5.NavigatorState>? navigatorKey])
