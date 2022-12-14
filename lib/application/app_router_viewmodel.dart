@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:stacked/stacked.dart';
@@ -10,13 +11,15 @@ class AppRouteViewModel extends BaseViewModel {
   GetIt getIt = GetIt.instance;
   late IPageRouterService routerService;
   late MaterialApp _app;
+  late BuildContext _context;
 
   bool _isConfigured = true;
   bool get isConfigured => _isConfigured;
   MaterialApp get app => _app;
 
-  initialized(AppRouter router) async {
+  initialized(AppRouter router, BuildContext context) async {
     _app = initApp(router);
+    _context = context;
     var configManager = getIt.get<IConfigManager>();
     var configResult = await configManager.isConfigured();
     routerService = getIt.get<IPageRouterService>();
@@ -38,5 +41,16 @@ class AppRouteViewModel extends BaseViewModel {
       routerDelegate: router.delegate(),
       routeInformationParser: router.defaultRouteParser(),
     );
+  }
+
+  void actionDilog(Widget render, FlushbarPosition position, Color color,
+      double border, BorderRadius radius, BuildContext context) {
+    Flushbar(
+      messageText: render,
+      flushbarPosition: position,
+      backgroundColor: color,
+      borderWidth: border,
+      borderRadius: radius,
+    ).show(context);
   }
 }

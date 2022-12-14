@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:stacked/stacked.dart';
-
-import 'package:synctest/Assets/styles.dart';
-
 import 'application/app_router_viewmodel.dart';
 import 'application/locator.dart';
 import 'application/router.gr.dart';
@@ -29,6 +26,6 @@ class MyApp extends StatelessWidget {
               child: model.app,
             ),
         viewModelBuilder: () => AppRouteViewModel(),
-        onModelReady: (model) => model.initialized(_appRouter));
+        onModelReady: (model) => model.initialized(_appRouter, context));
   }
 }

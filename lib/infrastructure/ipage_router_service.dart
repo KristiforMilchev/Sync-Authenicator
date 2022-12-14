@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 
 import '../application/app_router_viewmodel.dart';
@@ -15,4 +16,6 @@ abstract class IPageRouterService {
   void setPageIndex(int index);
   dynamic popDialog(BuildContext context, dynamic dialogContent);
   void backToPrevious(BuildContext context, dynamic result);
+  void initActionDialog(Widget render, FlushbarPosition position, Color color,
+      double border, BorderRadius radius, BuildContext context);
 }

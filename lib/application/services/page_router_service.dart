@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:synctest/application/app_router_viewmodel.dart';
@@ -48,5 +49,11 @@ class PageRouterService implements IPageRouterService {
   @override
   void setPageIndex(int index) {
     currentIndex = index;
+  }
+
+  @override
+  void initActionDialog(Widget render, FlushbarPosition position, Color color,
+      double border, BorderRadius radius, BuildContext context) {
+    model.actionDilog(render, position, color, border, radius, context);
   }
 }
