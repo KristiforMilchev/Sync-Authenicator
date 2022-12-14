@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:synctest/ui/views/components/shared/CardComponent.dart';
+
 import 'package:synctest/Assets/styles.dart';
+
+import '../shared/card_component.dart';
 
 class AuthLog extends StatelessWidget {
   final String? signedMessage;

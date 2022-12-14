@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:get_it/get_it.dart';
 import 'package:stacked/stacked.dart';
 import 'package:synctest/domain/models/import_settings.dart';

@@ -3,7 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../../../infrastructure/ipage_router_service.dart';
-import '../QrScannerComponent.dart';
+import '../qr_scanner_component.dart';
 
 class BottomBarViewModel extends BaseViewModel {
   GetIt getIt = GetIt.instance;

@@ -3,8 +3,6 @@ import 'package:stacked/stacked.dart';
 import 'package:synctest/domain/databases/context_models/auth_connection.dart';
 import 'package:synctest/infrastructure/idata_repository.dart';
 
-import '../components/shared/backup_button/backup_button_view.dart';
-
 class HomeViewModel extends BaseViewModel {
   final String _title = "Hello World";
   List<AuthConnection> _cards = [];

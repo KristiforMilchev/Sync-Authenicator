@@ -3,21 +3,21 @@ import 'package:flutter/material.dart';
 import '../../../Assets/styles.dart';
 
 class ApproveDialog extends StatelessWidget {
-  final String Title;
-  final List<Widget> Render;
-  const ApproveDialog({super.key, required this.Title, required this.Render});
+  final String title;
+  final List<Widget> render;
+  const ApproveDialog({super.key, required this.title, required this.render});
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Center(
-          child: Text(Title, style: TextStyle(color: ThemeColors.mainText))),
-      buttonPadding: EdgeInsets.all(12),
+          child: Text(title, style: TextStyle(color: ThemeColors.mainText))),
+      buttonPadding: const EdgeInsets.all(12),
       alignment: Alignment.center,
       content: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
-        children: Render,
+        children: render,
       ),
       backgroundColor: ThemeColors.mainThemeBackground,
       actions: <Widget>[

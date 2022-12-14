@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:synctest/Assets/styles.dart';
-import 'package:synctest/ui/views/components/DialogComponent.dart';
+import 'package:synctest/ui/views/components/dialog_component.dart';
 
 class ConnectionComponent extends StatelessWidget {
   final String? url;
   final String? email;
   final String? currentDate;
-  final bool IsMain;
-  ConnectionComponent(
+  final bool isMain;
+  const ConnectionComponent(
       {Key? key,
       required this.url,
       required this.email,
       required this.currentDate,
-      required this.IsMain})
+      required this.isMain})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => InitDialog(url!, context),
+      onTap: () => initDialog(url!, context),
       child: Column(
         children: [
-          if (IsMain)
+          if (isMain)
             Container(
               alignment: Alignment.topRight,
               margin: GeneralTheme.rowTopMargin,
@@ -68,13 +68,12 @@ class ConnectionComponent extends StatelessWidget {
     );
   }
 
-  void InitDialog(String current, BuildContext context) {
-    if (IsMain) {
-      print("object");
+  void initDialog(String current, BuildContext context) {
+    if (isMain) {
       showDialog(
           context: context,
           builder: (BuildContext context) {
-            return ApproveDialog(Render: [
+            return ApproveDialog(render: [
               Center(
                   heightFactor: 1,
                   child: Text('Approve sign in request for:',
@@ -83,7 +82,7 @@ class ConnectionComponent extends StatelessWidget {
                   heightFactor: 1.9,
                   child: Text(current,
                       style: TextStyle(color: ThemeColors.activeMenu))),
-            ], Title: "Authentication Request");
+            ], title: "Authentication Request");
           });
     }
   }
@@ -92,7 +91,7 @@ class ConnectionComponent extends StatelessWidget {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return ApproveDialog(Render: [
+          return ApproveDialog(render: [
             Center(
                 heightFactor: 1,
                 child: Text(
@@ -103,7 +102,7 @@ class ConnectionComponent extends StatelessWidget {
                 child: Text(
                     "Removing the connection will remove all historical data and may cause issues if the url provider doesn't account for the action.",
                     style: TextStyle(color: ThemeColors.activeMenu))),
-          ], Title: "Remove 2FA Connection");
+          ], title: "Remove 2FA Connection");
         });
   }
 }

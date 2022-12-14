@@ -3,8 +3,8 @@ import 'package:stacked/stacked.dart';
 import 'package:synctest/ui/views/components/shared/application_bar.dart';
 import 'package:synctest/ui/views/components/shared/bottom_bar/bottom_bar.dart';
 import '../../../Assets/styles.dart';
-import '../components/ConnectionComponent.dart';
-import '../components/shared/CardComponent.dart';
+import '../components/connection_component.dart';
+import '../components/shared/card_component.dart';
 import 'home_viewmodel.dart';
 
 class HomeView extends StatelessWidget {
@@ -24,7 +24,7 @@ class HomeView extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return CardComponent(
                       render: ConnectionComponent(
-                    IsMain: true,
+                    isMain: true,
                     currentDate: model.cards
                         .elementAt(index)
                         .createdAt

@@ -5,16 +5,14 @@ import 'package:flutter/material.dart';
 
 import 'package:get_it/get_it.dart';
 import 'package:stacked/stacked.dart';
-import 'package:synctest/domain/databases/context_models/auth_connection.dart';
 
-import 'package:synctest/domain/models/import_settings.dart';
 import 'package:synctest/infrastructure/iblockchain_provider.dart';
 import 'package:synctest/infrastructure/iconfig_manager.dart';
 import 'package:synctest/infrastructure/ipage_router_service.dart';
 
 import '../../../domain/databases/context_models/user_settings.dart';
 import '../../../domain/general_config.dart';
-import '../components/shared/QrScannerComponent.dart';
+import '../components/shared/qr_scanner_component.dart';
 
 class SetupViewModel extends BaseViewModel {
   GetIt getIt = GetIt.instance;

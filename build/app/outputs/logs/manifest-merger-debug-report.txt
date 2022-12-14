@@ -25,6 +25,7 @@ INJECTED from /home/kristifor/Projects/Sync-Authenicator/android/app/src/main/An
 INJECTED from /home/kristifor/Projects/Sync-Authenicator/android/app/src/main/AndroidManifest.xml:1:1-34:12
 INJECTED from /home/kristifor/Projects/Sync-Authenicator/android/app/src/main/AndroidManifest.xml:1:1-34:12
 MERGED from /home/kristifor/Projects/Sync-Authenicator/android/app/src/main/AndroidManifest.xml:1:1-34:12
+MERGED from [:image_gallery_saver] /home/kristifor/Projects/Sync-Authenicator/build/image_gallery_saver/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:objectbox_flutter_libs] /home/kristifor/Projects/Sync-Authenicator/build/objectbox_flutter_libs/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:sqlite3_flutter_libs] /home/kristifor/Projects/Sync-Authenicator/build/sqlite3_flutter_libs/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:path_provider_android] /home/kristifor/Projects/Sync-Authenicator/build/path_provider_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
@@ -82,6 +83,8 @@ uses-sdk
 INJECTED from /home/kristifor/Projects/Sync-Authenicator/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/kristifor/Projects/Sync-Authenicator/android/app/src/main/AndroidManifest.xml
 INJECTED from /home/kristifor/Projects/Sync-Authenicator/android/app/src/main/AndroidManifest.xml
+MERGED from [:image_gallery_saver] /home/kristifor/Projects/Sync-Authenicator/build/image_gallery_saver/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:image_gallery_saver] /home/kristifor/Projects/Sync-Authenicator/build/image_gallery_saver/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:objectbox_flutter_libs] /home/kristifor/Projects/Sync-Authenicator/build/objectbox_flutter_libs/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:objectbox_flutter_libs] /home/kristifor/Projects/Sync-Authenicator/build/objectbox_flutter_libs/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:sqlite3_flutter_libs] /home/kristifor/Projects/Sync-Authenicator/build/sqlite3_flutter_libs/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41

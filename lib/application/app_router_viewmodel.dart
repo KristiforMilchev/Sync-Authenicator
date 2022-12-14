@@ -11,7 +11,6 @@ class AppRouteViewModel extends BaseViewModel {
   GetIt getIt = GetIt.instance;
   late IPageRouterService routerService;
   late MaterialApp _app;
-  late BuildContext _context;
 
   bool _isConfigured = true;
   bool get isConfigured => _isConfigured;
@@ -19,7 +18,7 @@ class AppRouteViewModel extends BaseViewModel {
 
   initialized(AppRouter router, BuildContext context) async {
     _app = initApp(router);
-    _context = context;
+
     var configManager = getIt.get<IConfigManager>();
     var configResult = await configManager.isConfigured();
     routerService = getIt.get<IPageRouterService>();

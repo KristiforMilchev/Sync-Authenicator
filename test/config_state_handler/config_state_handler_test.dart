@@ -2,7 +2,7 @@ import 'package:encrypt/encrypt.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:http/http.dart';
+
 import 'package:synctest/application/services/config_manager.dart';
 import 'package:synctest/application/services/data_repository.dart';
 import 'package:synctest/domain/databases/context_models/user_settings.dart';

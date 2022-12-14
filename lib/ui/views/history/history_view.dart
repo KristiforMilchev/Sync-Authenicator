@@ -4,9 +4,9 @@ import 'package:synctest/domain/databases/context_models/auth_connection.dart';
 import 'package:synctest/ui/views/components/shared/bottom_bar/bottom_bar.dart';
 
 import '../../../Assets/styles.dart';
-import '../components/ConnectionComponent.dart';
-import '../components/history/AuthLogComponent.dart';
-import '../components/shared/CardComponent.dart';
+import '../components/connection_component.dart';
+import '../components/history/auth_log_component.dart';
+import '../components/shared/card_component.dart';
 import '../components/shared/application_bar.dart';
 import 'history_viewcomponent.dart';
 
@@ -73,9 +73,10 @@ class HistoryView extends StatelessWidget {
                           email: model.selectedProvider?.email,
                           currentDate: model.selectedProvider?.createdAt
                               .toIso8601String(),
-                          IsMain: false)),
+                          isMain: false)),
                 ),
             ]),
+            // ignore: sized_box_for_whitespace
             Container(
               height: 500,
               child: ListView.builder(
