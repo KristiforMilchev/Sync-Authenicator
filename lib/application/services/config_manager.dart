@@ -1,5 +1,5 @@
 import 'package:get_it/get_it.dart';
-import 'package:synctest/application/services/data_repository.dart';
+
 import 'package:synctest/domain/databases/context_models/connection_attempt.dart';
 import 'package:synctest/domain/databases/context_models/user_settings.dart';
 import 'package:synctest/domain/databases/context_models/auth_connection.dart';

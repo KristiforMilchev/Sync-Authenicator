@@ -32,7 +32,6 @@ class DatabaseContext implements IDatabaseContext {
 
   @override
   Box getBox() {
-    // TODO: implement GetBox
     return _box;
   }
 }

@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:synctest/domain/databases/context_models/auth_connection.dart';
 import 'package:synctest/domain/databases/context_models/user_settings.dart';
 

@@ -1,6 +1,5 @@
 import 'package:synctest/domain/databases/context_models/auth_connection.dart';
 import 'package:synctest/domain/models/user_wallet.dart';
-import 'package:web3dart/web3dart.dart';
 
 class TestsData {
   String privateKey =
