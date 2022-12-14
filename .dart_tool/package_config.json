@@ -14,6 +14,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "another_flushbar",
+      "rootUri": "file:///home/kristifor/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/another_flushbar-1.12.29",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "args",
       "rootUri": "file:///home/kristifor/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/args-2.3.1",
       "packageUri": "lib/",
@@ -512,10 +518,22 @@
       "languageVersion": "2.14"
     },
     {
+      "name": "qr",
+      "rootUri": "file:///home/kristifor/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/qr-2.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "qr_code_scanner",
       "rootUri": "file:///home/kristifor/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/qr_code_scanner-1.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
+    },
+    {
+      "name": "qr_flutter",
+      "rootUri": "file:///home/kristifor/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/qr_flutter-4.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "recase",
@@ -698,7 +716,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2022-12-13T17:07:23.870315Z",
+  "generated": "2022-12-14T07:55:45.266914Z",
   "generator": "pub",
   "generatorVersion": "2.18.5"
 }
