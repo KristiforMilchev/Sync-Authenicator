@@ -19,12 +19,22 @@ class SetupView extends StatelessWidget {
           children: [
             Container(
               color: ThemeColors.mainThemeBackground,
-              child: const Center(child: Text("Ok")),
+              child: Center(
+                child: CircularProgressIndicator(
+                  color: ThemeColors.mainText,
+                  semanticsValue: "Importing account",
+                ),
+              ),
             ),
             const SetupWelcomeComponent(),
             Container(
               color: ThemeColors.mainThemeBackground,
-              child: const Center(child: Text("Ok")),
+              child: Center(
+                child: CircularProgressIndicator(
+                  color: ThemeColors.mainText,
+                  semanticsValue: "Creating new account",
+                ),
+              ),
             ),
           ],
         ),

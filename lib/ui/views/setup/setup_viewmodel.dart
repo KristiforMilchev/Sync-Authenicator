@@ -19,8 +19,11 @@ class SetupViewModel extends BaseViewModel {
   late IConfigManager configManager;
   late IBlokchainProvider blockchainProvider;
   late IPageRouterService router;
+  late PageController _controller;
+  PageController get controller => _controller;
 
   void initialise() async {
+    _controller = PageController(initialPage: 1);
     configManager = getIt.get<IConfigManager>();
     blockchainProvider = getIt.get<IBlokchainProvider>();
     router = getIt.get<IPageRouterService>();
@@ -60,13 +63,18 @@ class SetupViewModel extends BaseViewModel {
   }
 
   void createNewAccount() async {
-    var getNewAccount = blockchainProvider.createNewAccount();
-    var pk = bytesToHex(getNewAccount.privateKey);
-    var encryptKey =
-        blockchainProvider.encryptPk(GeneralConfig.encPassword, pk);
-    var publicAddress = getNewAccount.address.hex;
-    configManager.addNewConfig(
-        UserSettings(publicAddress, encryptKey.base64, DateTime.now()));
-    await router.changePage("/home-view");
+    try {
+      var getNewAccount = blockchainProvider.createNewAccount();
+      var pk = bytesToHex(getNewAccount.privateKey);
+      var encryptKey =
+          blockchainProvider.encryptPk(GeneralConfig.encPassword, pk);
+      var publicAddress = getNewAccount.address.hex;
+      configManager.addNewConfig(
+          UserSettings(publicAddress, encryptKey.base64, DateTime.now()));
+      await router.changePage("/home-view");
+    } on Exception catch (ex) {
+      ex.toString();
+      _controller.jumpToPage(1);
+    }
   }
 }
