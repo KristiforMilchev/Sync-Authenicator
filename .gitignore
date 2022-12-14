@@ -79,3 +79,12 @@ flutter-plugins-dependencies
 .build/*
 .dart_tool/
 .flutter-plugins-dependencies
+build/app/outputs/flutter-apk/app.apk.sha1
+build/app/outputs/flutter-apk/app.apk
+build/app/outputs/flutter-apk/app-debug.apk
+build/app/outputs/apk/debug/app-debug.apk
+build/app/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt
+build/app/intermediates/flutter/debug/flutter_assets/kernel_blob.bin
+build/app/intermediates/compressed_assets/debug/out/assets/flutter_assets/kernel_blob.bin.jar
+build/app/intermediates/assets/debug/mergeDebugAssets/flutter_assets/kernel_blob.bin
+.flutter-plugins-dependencies
