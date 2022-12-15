@@ -15,10 +15,10 @@ class AppRouteViewModel extends BaseViewModel {
   bool _isConfigured = true;
   bool get isConfigured => _isConfigured;
   MaterialApp get app => _app;
-
+  late List<Flushbar> _dialogs;
   initialized(AppRouter router, BuildContext context) async {
     _app = initApp(router);
-
+    _dialogs = [];
     var configManager = getIt.get<IConfigManager>();
     var configResult = await configManager.isConfigured();
     routerService = getIt.get<IPageRouterService>();
@@ -43,13 +43,43 @@ class AppRouteViewModel extends BaseViewModel {
   }
 
   void actionDilog(Widget render, FlushbarPosition position, Color color,
-      double border, BorderRadius radius, BuildContext context) {
-    Flushbar(
+      double border, BorderRadius radius, BuildContext context, String id) {
+    var dialog = Flushbar(
+      key: Key(id),
       messageText: render,
       flushbarPosition: position,
       backgroundColor: color,
       borderWidth: border,
       borderRadius: radius,
-    ).show(context);
+    );
+
+    //This is really ugly, but since it's async and we can't get the widget
+    //from the tree because of the dynamic context We have to somehow account
+    //for the widget getting dissmissed by the user e.g user accidently
+    //clicked on the wrong authenication approval box and slided down the
+    //panel without clicking approve
+    //TODO refactor this futher in ase you run into a better alternative
+    _dialogs
+        .add(dialog..show(context).then((value) => ensureDisposed(dialog, id)));
+  }
+
+  void dismissActionDialog(String id) {
+    var dialog = _dialogs.singleWhere((element) => element.key == Key(id));
+
+    dialog.dismiss();
+    _dialogs.remove(dialog);
+  }
+
+  ensureDisposed(Flushbar dialog, String id) {
+    var isDisposed = false;
+    var existingDialog =
+        _dialogs.singleWhere((element) => element.key == Key(id), orElse: () {
+      isDisposed = true;
+      return Flushbar();
+    });
+
+    if (!isDisposed) {
+      _dialogs.remove(existingDialog);
+    }
   }
 }

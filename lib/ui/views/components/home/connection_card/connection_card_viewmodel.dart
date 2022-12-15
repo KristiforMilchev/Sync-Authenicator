@@ -4,9 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:stacked/stacked.dart';
 import 'package:synctest/infrastructure/ipage_router_service.dart';
 import 'package:synctest/ui/views/components/shared/signature_actions/signature_actions_view.dart';
-
 import '../../../../../Assets/styles.dart';
-import '../../history/auth_log_component.dart';
 
 class ConnectionCardViewModel extends BaseViewModel {
   GetIt getIt = GetIt.instance;
@@ -29,12 +27,14 @@ class ConnectionCardViewModel extends BaseViewModel {
           plainMessage: plainMessage,
           signedMessage: signedMessage,
           url: url,
+          id: "approveBox",
         ),
         FlushbarPosition.BOTTOM,
         ThemeColors.cardBackground,
         1,
         const BorderRadius.only(
             topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-        context);
+        context,
+        "approveBox");
   }
 }
