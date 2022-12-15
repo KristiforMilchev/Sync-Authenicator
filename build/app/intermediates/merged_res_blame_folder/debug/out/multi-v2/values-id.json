@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/kristifor/Projects/Sync-Authenicator/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-id/values-id.xml",
+            "outputFile": "C:\\BlockChain Auth\\Sync-Authenicator\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-id\\values-id.xml",
             "map": [
                 {
-                    "source": "/home/kristifor/.gradle/caches/transforms-3/77be51fb7627331aa2f8ec0f3aaea8ed/transformed/jetified-zxing-android-embedded-4.3.0/res/values-id/values-id.xml",
+                    "source": "C:\\Users\\23326\\.gradle\\caches\\transforms-3\\77be51fb7627331aa2f8ec0f3aaea8ed\\transformed\\jetified-zxing-android-embedded-4.3.0\\res\\values-id\\values-id.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/kristifor/Projects/Sync-Authenicator/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-xlarge-v4/values-xlarge-v4.xml",
+            "outputFile": "C:\\BlockChain Auth\\Sync-Authenicator\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-xlarge-v4\\values-xlarge-v4.xml",
             "map": [
                 {
-                    "source": "/home/kristifor/.gradle/caches/transforms-3/314baeb09f65a7cee9a0a98683b112e8/transformed/appcompat-1.4.2/res/values-xlarge-v4/values-xlarge-v4.xml",
+                    "source": "C:\\Users\\23326\\.gradle\\caches\\transforms-3\\314baeb09f65a7cee9a0a98683b112e8\\transformed\\appcompat-1.4.2\\res\\values-xlarge-v4\\values-xlarge-v4.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7",
                         "startColumns": "4,4,4,4,4,4",

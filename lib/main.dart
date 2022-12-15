@@ -1,10 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'Components/Shared/QrScannerComponent.dart';
-import 'Components/Views/Home.dart';
+import 'Components/Views/home.dart';
 import 'Components/Views/History.dart';
 import 'package:synctest/Assets/styles.dart';
-
 
 void main() {
   runApp(const MyApp());
@@ -13,10 +11,10 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
@@ -54,15 +52,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   int index = 0;
-  final screens = [HomePage(), HistoryPage(), HistoryPage()];
+  final screens = [ const HomePage(), null, const  HistoryPage()];
 
-  Future<void> menuItemSelected(int currentIndex)
-  async {
+  Future<void> menuItemSelected(int currentIndex) async {
     print(index);
-    if(currentIndex != 1)
-    {
+    if (currentIndex != 1) {
       print("Attempting to change state");
       setState(() {
         print(index);
@@ -70,25 +65,16 @@ class _MyHomePageState extends State<MyHomePage> {
         this.index = currentIndex;
         print(index);
       });
-    }
-    else
-    {
+    } else {
       //TODO implement barcode scanner.
       Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => const QRViewExample(),
       ));
     }
   }
-  
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
@@ -98,9 +84,11 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Container(
           color: Colors.transparent,
           child: const Center(
-
-            child:  Image(image: NetworkImage("https://linksync.tech/Logov2.png"), width: 150,height: 150,)
-            ,
+            child: Image(
+              image: NetworkImage("https://linksync.tech/Logov2.png"),
+              width: 150,
+              height: 150,
+            ),
           ),
         ),
       ),
@@ -113,14 +101,23 @@ class _MyHomePageState extends State<MyHomePage> {
         fixedColor: ThemeColors.activeMenu,
         unselectedItemColor: ThemeColors.mainText,
         currentIndex: index,
-        items:  [
-          BottomNavigationBarItem(label: "Home", icon: Icon(Icons.home, color: ThemeColors.mainText), activeIcon: Icon(Icons.home, color: ThemeColors.activeMenu)),
-          BottomNavigationBarItem(label: "Scan", icon: Icon(Icons.camera_alt, color: ThemeColors.mainText), activeIcon: Icon(Icons.camera_alt, color: ThemeColors.activeMenu)),
-          BottomNavigationBarItem(label: "History", icon: Icon(Icons.history, color: ThemeColors.mainText), activeIcon: Icon(Icons.history, color: ThemeColors.activeMenu)),
+        items: [
+          BottomNavigationBarItem(
+              label: "Home",
+              icon: Icon(Icons.home, color: ThemeColors.mainText),
+              activeIcon: Icon(Icons.home, color: ThemeColors.activeMenu)),
+          BottomNavigationBarItem(
+              label: "Scan",
+              icon: Icon(Icons.camera_alt, color: ThemeColors.mainText),
+              activeIcon:
+                  Icon(Icons.camera_alt, color: ThemeColors.activeMenu)),
+          BottomNavigationBarItem(
+              label: "History",
+              icon: Icon(Icons.history, color: ThemeColors.mainText),
+              activeIcon: Icon(Icons.history, color: ThemeColors.activeMenu)),
         ],
         onTap: (index) => menuItemSelected(index),
       ),
-
     );
   }
 }
