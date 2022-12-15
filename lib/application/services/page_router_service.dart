@@ -55,7 +55,12 @@ class PageRouterService implements IPageRouterService {
 
   @override
   void initActionDialog(Widget render, FlushbarPosition position, Color color,
-      double border, BorderRadius radius, BuildContext context) {
-    model.actionDilog(render, position, color, border, radius, context);
+      double border, BorderRadius radius, BuildContext context, String id) {
+    model.actionDilog(render, position, color, border, radius, context, id);
+  }
+
+  @override
+  void dismissActionDialog(String id) {
+    model.dismissActionDialog(id);
   }
 }

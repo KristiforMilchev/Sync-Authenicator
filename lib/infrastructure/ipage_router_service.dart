@@ -17,5 +17,6 @@ abstract class IPageRouterService {
   dynamic popDialog(BuildContext context, dynamic dialogContent);
   void backToPrevious(BuildContext context, dynamic result);
   void initActionDialog(Widget render, FlushbarPosition position, Color color,
-      double border, BorderRadius radius, BuildContext context);
+      double border, BorderRadius radius, BuildContext context, String id);
+  void dismissActionDialog(String id);
 }
