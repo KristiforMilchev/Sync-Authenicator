@@ -6,7 +6,6 @@ import 'package:synctest/Assets/styles.dart';
 
 const List<String> list = <String>['One', 'Two', 'Three', 'Four'];
 
-
 class HistoryPage extends StatefulWidget {
   const HistoryPage({Key? key}) : super(key: key);
 
@@ -26,7 +25,6 @@ class _State extends State<HistoryPage> {
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-
               Container(
                 width: 300,
                 transformAlignment: AlignmentDirectional.centerStart,
@@ -34,10 +32,11 @@ class _State extends State<HistoryPage> {
                   isExpanded: true,
                   value: dropdownValue,
                   alignment: AlignmentDirectional.centerStart,
-                  icon:  Icon(Icons.arrow_downward, color: ThemeColors.activeMenu),
+                  icon:
+                      Icon(Icons.arrow_downward, color: ThemeColors.activeMenu),
                   elevation: 16,
                   focusColor: ThemeColors.activeMenu,
-                  dropdownColor:  ThemeColors.mainThemeBackground,
+                  dropdownColor: ThemeColors.mainThemeBackground,
                   style: TextStyle(color: ThemeColors.mainText),
                   underline: Container(
                     height: 2,
@@ -54,11 +53,10 @@ class _State extends State<HistoryPage> {
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Center(
-
-                         child: Text(
-                           value,
-                           textAlign: TextAlign.center,
-                          ),
+                        child: Text(
+                          value,
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                     );
                   }).toList(),
@@ -66,8 +64,13 @@ class _State extends State<HistoryPage> {
               ),
             ],
           ),
-          const CardComponent(render: ConnectionComponent(url: "portal.azure.com", email: "kristifor@collaborativesoft.com", currentDate: "02/12/2022",IsMain: false)),
-          const AuthLog()
+          const CardComponent(
+              render: ConnectionComponent(
+                  url: "portal.azure.com",
+                  email: "kristifor@collaborativesoft.com",
+                  currentDate: "02/12/2022",
+                  IsMain: false)),
+          Expanded(child: const AuthLog())
         ],
       ),
     );

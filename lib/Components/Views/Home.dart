@@ -46,8 +46,8 @@ class HomePage extends StatelessWidget {
         body: connectionComponentList.isEmpty
             ? Center(
                 child: Text(
-                  'No link added ',
-                  style: TextStyle(color: ThemeColors.mainText),
+                  'No link added',
+                  style: TextStyle(color: ThemeColors.mainText, fontSize:30),
                 ),
               )
             : ListView.builder(
