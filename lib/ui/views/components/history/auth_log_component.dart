@@ -9,12 +9,12 @@ class AuthLog extends StatelessWidget {
   final String? signature;
   final String? signatureDate;
 
-  const AuthLog(
-      {Key? key,
-      required this.signedMessage,
-      required this.signature,
-      required this.signatureDate})
-      : super(key: key);
+  const AuthLog({
+    Key? key,
+    required this.signedMessage,
+    required this.signature,
+    required this.signatureDate,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

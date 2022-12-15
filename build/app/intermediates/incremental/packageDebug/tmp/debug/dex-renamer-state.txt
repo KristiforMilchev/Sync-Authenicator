@@ -1,4 +1,4 @@
-#Wed Dec 14 13:05:22 EET 2022
+#Thu Dec 15 08:56:31 EET 2022
 base.0=/home/kristifor/Projects/Sync-Authenicator/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex
