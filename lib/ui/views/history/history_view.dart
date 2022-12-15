@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:synctest/domain/databases/context_models/auth_connection.dart';
+import 'package:synctest/ui/views/components/home/connection_card/connection_card_view.dart';
 import 'package:synctest/ui/views/components/shared/bottom_bar/bottom_bar.dart';
 
 import '../../../Assets/styles.dart';
-import '../components/connection_component.dart';
+
 import '../components/history/auth_log_component.dart';
 import '../components/shared/card_component.dart';
 import '../components/shared/application_bar.dart';
@@ -68,7 +69,7 @@ class HistoryView extends StatelessWidget {
                 Container(
                   alignment: Alignment.topCenter,
                   child: CardComponent(
-                      render: ConnectionComponent(
+                      render: ConnectionCard(
                           url: model.selectedProvider?.url,
                           email: model.selectedProvider?.email,
                           currentDate: model.selectedProvider?.createdAt
