@@ -92,7 +92,7 @@ class SignatureActionsView extends StatelessWidget {
                   child: Center(
                     child: CircularProgressIndicator(
                       color: ThemeColors.mainText,
-                      semanticsValue: "Importing account",
+                      semanticsValue: "Authenicating please wait",
                     ),
                   ),
                 ),
