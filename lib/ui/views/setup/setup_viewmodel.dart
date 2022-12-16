@@ -27,6 +27,7 @@ class SetupViewModel extends BaseViewModel {
     configManager = getIt.get<IConfigManager>();
     blockchainProvider = getIt.get<IBlokchainProvider>();
     router = getIt.get<IPageRouterService>();
+
     notifyListeners();
   }
 
