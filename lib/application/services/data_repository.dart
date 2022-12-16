@@ -49,6 +49,16 @@ class DataRepository implements IDataRepository {
   }
 
   @override
+  Future<int> getLastAuthId() async {
+    var connections = await getAllConnections();
+    if (connections.isEmpty) {
+      return 0;
+    }
+
+    return connections.last.id;
+  }
+
+  @override
   Future<AuthConnection?> getConnectionsById(int id) async {
     var box = await _context.create(_database);
     var result = box.values
