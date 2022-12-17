@@ -11,7 +11,11 @@ class HttpProvider<T> implements IHttpProviderService<T> {
         await http.get(Uri.parse(request.url), headers: request.headers);
 
     if (response.statusCode == 200) {
-      return jsonDecode(response.body) as T;
+      try {
+        return jsonDecode(response.body) as T;
+      } catch (e) {
+        return response.body as T;
+      }
     } else {
       throw Exception('Failed to load request: ${request.url}');
     }
@@ -26,7 +30,11 @@ class HttpProvider<T> implements IHttpProviderService<T> {
     );
 
     if (result.statusCode == 200) {
-      return jsonDecode(result.body) as T;
+      try {
+        return jsonDecode(result.body) as T;
+      } catch (e) {
+        return result.body as T;
+      }
     }
 
     throw Exception(
@@ -41,7 +49,13 @@ class HttpProvider<T> implements IHttpProviderService<T> {
       body: jsonEncode(request.params),
     );
 
-    if (result.statusCode == 200) return jsonDecode(result.body) as T;
+    if (result.statusCode == 200) {
+      try {
+        return jsonDecode(result.body) as T;
+      } catch (e) {
+        return result.body as T;
+      }
+    }
 
     throw Exception(
         "Failed to put data ${request.url}  Data: ${request.params}");

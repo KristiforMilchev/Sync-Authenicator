@@ -15,13 +15,7 @@ class HomeViewModel extends BaseViewModel {
   void initialise() async {
     var repository = getIt.get<IDataRepository>();
     _cards = await repository.getEnabledConnections();
-    _cards.add(AuthConnection(
-        222,
-        DateTime.now(),
-        "kristifor@collaborativesoft.com",
-        true,
-        "wdadwaddwa",
-        "portal.azure.com"));
+
     notifyListeners();
   }
 
