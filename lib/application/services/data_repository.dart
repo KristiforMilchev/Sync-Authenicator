@@ -229,4 +229,16 @@ class DataRepository implements IDataRepository {
 
     return setting.isEmpty ? null : setting.single;
   }
+
+  @override
+  Future<bool> updateAuthConnection(AuthConnection connection) async {
+    var box = await _context.create(_database);
+    var result = box.values
+        .whereType<AuthConnection>()
+        .firstWhere((element) => element.id == connection.id);
+    result.createdAt = connection.createdAt;
+    result.save();
+    box.close();
+    return true;
+  }
 }

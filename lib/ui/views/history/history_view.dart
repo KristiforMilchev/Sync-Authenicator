@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:synctest/application/converters/converters.dart';
 import 'package:synctest/domain/databases/context_models/auth_connection.dart';
 import 'package:synctest/ui/views/components/home/connection_card/connection_card_view.dart';
 import 'package:synctest/ui/views/components/shared/bottom_bar/bottom_bar.dart';
@@ -72,8 +73,9 @@ class HistoryView extends StatelessWidget {
                       render: ConnectionCard(
                           url: model.selectedProvider?.url,
                           email: model.selectedProvider?.email,
-                          currentDate: model.selectedProvider?.createdAt
-                              .toIso8601String(),
+                          currentDate: Converters.formatDate(
+                              model.selectedProvider!.createdAt,
+                              "yyyy-MM-dd hh:mm"),
                           isMain: false)),
                 ),
             ]),
@@ -87,7 +89,8 @@ class HistoryView extends StatelessWidget {
                     return AuthLog(
                         signedMessage: current.message,
                         signature: current.signature,
-                        signatureDate: current.date.toIso8601String());
+                        signatureDate: Converters.formatDate(
+                            current.date, "yyyy-MM-dd hh:mm"));
                   }),
             ),
           ]),

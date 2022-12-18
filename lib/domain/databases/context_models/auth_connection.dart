@@ -15,7 +15,7 @@ class AuthConnection extends HiveObject {
   @HiveField(4)
   final bool isEnabled;
   @HiveField(5)
-  late final DateTime createdAt;
+  DateTime createdAt;
 
   AuthConnection(this.id, this.createdAt, this.email, this.isEnabled,
       this.registerHash, this.url);
