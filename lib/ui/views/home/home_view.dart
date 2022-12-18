@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'package:stacked/stacked.dart';
 import 'package:synctest/ui/views/components/shared/application_bar.dart';
 import 'package:synctest/ui/views/components/shared/bottom_bar/bottom_bar.dart';
 import '../../../Assets/styles.dart';
 
+import '../../../application/converters/converters.dart';
 import '../components/home/connection_card/connection_card_view.dart';
 import '../components/shared/card_component.dart';
 import 'home_viewmodel.dart';
@@ -26,10 +28,9 @@ class HomeView extends StatelessWidget {
                   return CardComponent(
                       render: ConnectionCard(
                     isMain: true,
-                    currentDate: model.cards
-                        .elementAt(index)
-                        .createdAt
-                        .toIso8601String(),
+                    currentDate: Converters.formatDate(
+                        model.cards.elementAt(index).createdAt,
+                        "yyyy-MM-dd hh:mm"),
                     url: model.cards.elementAt(index).url,
                     email: model.cards.elementAt(index).email,
                   ));

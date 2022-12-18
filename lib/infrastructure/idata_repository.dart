@@ -9,6 +9,7 @@ abstract class IDataRepository<T> {
   Future<int> getLastAuthId();
   Future<AuthConnection?> getConnectionsById(int id);
   Future<AuthConnection?> getConnectionsByEmailUrl(String email, String url);
+  Future<bool> updateAuthConnection(AuthConnection connection);
   Future<int> getLasConnAttemptId();
 
   Future<List<ConnectionAttempt>> getConnectionAttemptsByAuthId(int id);

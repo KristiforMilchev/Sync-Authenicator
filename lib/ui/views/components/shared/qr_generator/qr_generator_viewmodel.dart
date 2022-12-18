@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:stacked/stacked.dart';
+import 'package:synctest/application/converters/converters.dart';
 
 class QrGeneratorViewModel extends BaseViewModel {
   late String _generateQr;
@@ -32,7 +33,7 @@ class QrGeneratorViewModel extends BaseViewModel {
     // ignore: prefer_typing_uninitialized_variables
     var imageData;
     await imageCapure.then((value) => {imageData = value!});
-    var date = DateTime.now().toIso8601String();
+    var date = Converters.formatDate(DateTime.now(), "yyyy-MM-dd hh:mm");
     await ImageGallerySaver.saveImage(imageData,
         quality: 80, name: "Sync-Authenicator-backup-$date");
     _btnText = "Image saved to gallery Sync-Authenicator-backup-$date";

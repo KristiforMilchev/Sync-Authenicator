@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'package:intl/intl.dart';
 
 class Converters {
   Uint8List convertStringToUint8List(String str) {
@@ -24,5 +25,10 @@ class Converters {
 
     // todo there must be a faster way to do this?
     return Uint8List(32)..setRange(32 - data.length, 32, data);
+  }
+
+  static String formatDate(DateTime date, String format) {
+    var dateFormater = DateFormat(format);
+    return dateFormater.format(date);
   }
 }

@@ -1,11 +1,13 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:encrypt/encrypt.dart';
+import 'package:flutter/material.dart';
 import 'package:synctest/domain/databases/context_models/connection_attempt.dart';
 import 'package:synctest/infrastructure/iauthentication.dart';
 import 'package:synctest/infrastructure/iblockchain_provider.dart';
 import 'package:synctest/infrastructure/idata_repository.dart';
-import 'package:synctest/infrastructure/ihttp_provider_service.dart';
+
 import 'package:synctest/ui/views/history/history_viewcomponent.dart';
 import 'package:synctest/ui/views/home/home_viewmodel.dart';
 
@@ -13,13 +15,14 @@ import '../../domain/databases/context_models/auth_connection.dart';
 import '../../domain/general_config.dart';
 import '../../domain/models/add_auth_connection.dart';
 import '../../domain/models/http_request.dart';
+import '../../infrastructure/ihttp_provider_service.dart';
 
 class Authentication implements IAuthentication {
   late IHttpProviderService httpProviderService;
   late IDataRepository repository;
   late IBlokchainProvider blockchainProvider;
-  late HomeViewModel homeModel;
-  late HistoryViewModel historyModel;
+  late HomeViewModel? homeModel;
+  late HistoryViewModel? historyModel;
 
   Authentication(
       this.httpProviderService, this.repository, this.blockchainProvider);
@@ -53,8 +56,9 @@ class Authentication implements IAuthentication {
           true,
           "obsolete",
           connectionDetails.url);
+
       repository.addConnection(authConention);
-      homeModel.addNewConnection(authConention);
+      homeModel?.addNewConnection(authConention);
 
       return true;
     }
@@ -101,15 +105,20 @@ class Authentication implements IAuthentication {
     if (result) {
       var getAuth = await repository.getConnectionsByEmailUrl(email, url);
       getAuth!.createdAt = DateTime.now();
-      getAuth.save();
+      await repository.updateAuthConnection(getAuth);
 
       var lastId = await repository.getLasConnAttemptId();
       var newAttempt = ConnectionAttempt(
           getAuth.id, DateTime.now(), lastId + 1, plain, signed);
       await repository.addConnectionAttempt(newAttempt);
+      homeModel?.connectionApproved(getAuth);
 
-      homeModel.connectionApproved(getAuth);
-      historyModel.connectionAttemptAdded(getAuth.id, newAttempt);
+      //Since historyModel can be empty here and null safety doesn't work for
+      //BaseViewModels we have catch the exception in the sepecific use case.
+      try {
+        historyModel!.connectionAttemptAdded(getAuth.id, newAttempt);
+        // ignore: empty_catches
+      } catch (ex) {}
     }
 
     return result;
