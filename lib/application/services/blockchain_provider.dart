@@ -28,7 +28,8 @@ class Blockchainprovider implements IBlokchainProvider {
   String signData(String message, UserWallet activeWallet) {
     var converter = Converters();
     Uint8List encodedMessage = converter.convertStringToUint8List(message);
-    String signature = EthSigUtil.signMessage(
+
+    String signature = EthSigUtil.signPersonalMessage(
         privateKey: activeWallet.privateKey, message: encodedMessage);
     return signature;
   }
@@ -38,7 +39,7 @@ class Blockchainprovider implements IBlokchainProvider {
     var converter = Converters();
     var currentMessage = converter.convertStringToUint8List(plainMessage);
 
-    return EthSigUtil.recoverSignature(
+    return EthSigUtil.recoverPersonalSignature(
         signature: signature, message: currentMessage);
   }
 

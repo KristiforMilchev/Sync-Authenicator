@@ -8,13 +8,15 @@ class SignatureActionsView extends StatelessWidget {
   final String plainMessage;
   final String url;
   final String id;
+  final String account;
 
   const SignatureActionsView(
       {super.key,
       required this.plainMessage,
       required this.signedMessage,
       required this.url,
-      required this.id});
+      required this.id,
+      required this.account});
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +109,8 @@ class SignatureActionsView extends StatelessWidget {
         }
       },
       viewModelBuilder: () => SignatureActionsViewModel(),
-      onModelReady: (viewModel) => viewModel.initialise(id),
+      onModelReady: (viewModel) =>
+          viewModel.initialise(id, plainMessage, url, signedMessage, account),
     );
   }
 }
