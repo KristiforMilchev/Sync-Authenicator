@@ -1,26 +1,32 @@
 import 'package:get_it/get_it.dart';
 import 'package:stacked/stacked.dart';
 import 'package:synctest/domain/databases/context_models/auth_connection.dart';
+import 'package:synctest/infrastructure/iauthentication.dart';
 import 'package:synctest/infrastructure/idata_repository.dart';
 
 class HomeViewModel extends BaseViewModel {
-  final String _title = "Hello World";
   List<AuthConnection> _cards = [];
   GetIt getIt = GetIt.instance;
-  String get title => _title;
-  int _counter = 0;
-  int get counter => _counter;
+  late IAuthentication _authentication;
   List<AuthConnection> get cards => _cards;
 
   void initialise() async {
     var repository = getIt.get<IDataRepository>();
     _cards = await repository.getEnabledConnections();
+    _authentication = getIt.get<IAuthentication>();
+    _authentication.bindHomeModels(this);
+    notifyListeners();
+  }
+
+  void connectionApproved(AuthConnection getAuth) {
+    _cards.firstWhere((element) => element.id == getAuth.id).createdAt =
+        getAuth.createdAt;
 
     notifyListeners();
   }
 
-  void updateCounter() {
-    _counter++;
+  void addNewConnection(AuthConnection authConention) {
+    _cards.add(authConention);
     notifyListeners();
   }
 }

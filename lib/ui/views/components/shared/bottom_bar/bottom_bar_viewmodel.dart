@@ -40,7 +40,7 @@ class BottomBarViewModel extends BaseViewModel {
       ));
       // {"email":"poko@contoso.com","message":"e62df3c1e8b44ced8b3492d9eed73924","url":"http://localhost:7246"}
 
-      await _authentication.pairEndpoint(scanData);
+      await _authentication.pairEndpoint(scanResult);
     }
   }
 }

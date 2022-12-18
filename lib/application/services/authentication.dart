@@ -1,13 +1,17 @@
 import 'dart:convert';
+import 'dart:html';
 
 import 'package:encrypt/encrypt.dart';
 import 'package:flutter/foundation.dart';
 import 'package:synctest/application/converters/converters.dart';
 import 'package:synctest/application/services/http_provider.dart';
+import 'package:synctest/domain/databases/context_models/connection_attempt.dart';
 import 'package:synctest/infrastructure/iauthentication.dart';
 import 'package:synctest/infrastructure/iblockchain_provider.dart';
 import 'package:synctest/infrastructure/idata_repository.dart';
 import 'package:synctest/infrastructure/ihttp_provider_service.dart';
+import 'package:synctest/ui/views/history/history_viewcomponent.dart';
+import 'package:synctest/ui/views/home/home_viewmodel.dart';
 
 import '../../domain/databases/context_models/auth_connection.dart';
 import '../../domain/general_config.dart';
@@ -18,6 +22,9 @@ class Authentication implements IAuthentication {
   late IHttpProviderService httpProviderService;
   late IDataRepository repository;
   late IBlokchainProvider blockchainProvider;
+  late HomeViewModel homeModel;
+  late HistoryViewModel historyModel;
+
   Authentication(
       this.httpProviderService, this.repository, this.blockchainProvider);
 
@@ -35,17 +42,6 @@ class Authentication implements IAuthentication {
       'Signed': signed,
       'Email': connectionDetails.email
     };
-    var castList =
-        Converters().convertStringToUint8List(connectionDetails.message);
-    print(connectionDetails.message);
-    print(Converters().convertUint8ListToString(castList));
-
-    var decode =
-        blockchainProvider.decodeSigned(signed, connectionDetails.message);
-
-    if (wallet.publicAddress == decode) {
-      var test = 1;
-    }
 
     var res = await httpProviderService.postRequest<bool>(HttpRequest(
       "${connectionDetails.url}/home/pair",
@@ -54,13 +50,16 @@ class Authentication implements IAuthentication {
     ));
 
     if (res) {
-      repository.addConnection(AuthConnection(
+      var authConention = AuthConnection(
           await repository.getLastAuthId() + 1,
           DateTime.now(),
           connectionDetails.email,
           true,
           "obsolete",
-          connectionDetails.url));
+          connectionDetails.url);
+      repository.addConnection(authConention);
+      homeModel.addNewConnection(authConention);
+
       return true;
     }
 
@@ -96,11 +95,33 @@ class Authentication implements IAuthentication {
       'Signed': signed
     };
 
-    return await httpProviderService.postRequest<bool>(HttpRequest(
+    var result = await httpProviderService.postRequest<bool>(HttpRequest(
       // ignore: unnecessary_brace_in_string_interps
       "${url}/home/SignTwoFactor",
       {'Content-Type': 'application/json'},
       postData,
     ));
+
+    if (result) {
+      var getAuth = await repository.getConnectionsByEmailUrl(email, url);
+      getAuth!.createdAt = DateTime.now();
+      getAuth.save();
+
+      var lastId = await repository.getLasConnAttemptId();
+      var newAttempt = ConnectionAttempt(
+          getAuth.id, DateTime.now(), lastId + 1, plain, signed);
+      await repository.addConnectionAttempt(newAttempt);
+
+      homeModel.connectionApproved(getAuth);
+      historyModel.connectionAttemptAdded(getAuth.id, newAttempt);
+    }
+
+    return result;
   }
+
+  @override
+  void bindHistoryModel(HistoryViewModel model) => historyModel = model;
+
+  @override
+  void bindHomeModels(HomeViewModel model) => homeModel = model;
 }

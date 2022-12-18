@@ -49,8 +49,27 @@ class DataRepository implements IDataRepository {
   }
 
   @override
+  Future<List<ConnectionAttempt>> getAllConnnectionAttempts() async {
+    var box = await _context.create(_database);
+    var result = box.values.whereType<ConnectionAttempt>()..toList();
+
+    box.close();
+    return result.toList();
+  }
+
+  @override
   Future<int> getLastAuthId() async {
     var connections = await getAllConnections();
+    if (connections.isEmpty) {
+      return 0;
+    }
+
+    return connections.last.id;
+  }
+
+  @override
+  Future<int> getLasConnAttemptId() async {
+    var connections = await getAllConnnectionAttempts();
     if (connections.isEmpty) {
       return 0;
     }
@@ -64,6 +83,18 @@ class DataRepository implements IDataRepository {
     var result = box.values
         .whereType<AuthConnection>()
         .firstWhere((element) => element.id == id);
+
+    box.close();
+    return result;
+  }
+
+  @override
+  Future<AuthConnection?> getConnectionsByEmailUrl(
+      String email, String url) async {
+    var box = await _context.create(_database);
+    var result = box.values
+        .whereType<AuthConnection>()
+        .firstWhere((element) => element.url == url && element.email == email);
 
     box.close();
     return result;
