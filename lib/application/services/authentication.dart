@@ -1,10 +1,6 @@
 import 'dart:convert';
-import 'dart:html';
 
 import 'package:encrypt/encrypt.dart';
-import 'package:flutter/foundation.dart';
-import 'package:synctest/application/converters/converters.dart';
-import 'package:synctest/application/services/http_provider.dart';
 import 'package:synctest/domain/databases/context_models/connection_attempt.dart';
 import 'package:synctest/infrastructure/iauthentication.dart';
 import 'package:synctest/infrastructure/iblockchain_provider.dart';
