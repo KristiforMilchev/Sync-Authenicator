@@ -1,8 +1,6 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:encrypt/encrypt.dart';
-import 'package:flutter/material.dart';
 import 'package:synctest/domain/databases/context_models/connection_attempt.dart';
 import 'package:synctest/infrastructure/iauthentication.dart';
 import 'package:synctest/infrastructure/iblockchain_provider.dart';
