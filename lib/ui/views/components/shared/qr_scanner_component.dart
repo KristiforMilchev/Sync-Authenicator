@@ -70,6 +70,8 @@ class _QRViewExampleState extends State<QRViewExample> {
   void _onQRViewCreated(QRViewController controller) {
     setState(() {
       this.controller = controller;
+      controller.resumeCamera();
+      //controller.flipCamera();
     });
     controller.scannedDataStream.listen((scanData) {
       setState(() {
