@@ -29,7 +29,7 @@ class ConnectionCard extends StatelessWidget {
                 alignment: Alignment.topRight,
                 margin: GeneralTheme.rowTopMargin,
                 child: IconButton(
-                    onPressed: (() => model.removeItem(1, context)),
+                    onPressed: (() => model.removeItem(url!, email!, context)),
                     icon:
                         Icon(Icons.remove_circle, color: ThemeColors.mainText),
                     splashColor: ThemeColors.activeMenu,
