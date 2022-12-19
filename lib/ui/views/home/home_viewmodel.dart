@@ -29,4 +29,10 @@ class HomeViewModel extends BaseViewModel {
     _cards.add(authConention);
     notifyListeners();
   }
+
+  void connectionRemoved(AuthConnection connection) {
+    var getCard = _cards.firstWhere((element) => element.id == connection.id);
+    _cards.remove(getCard);
+    notifyListeners();
+  }
 }
