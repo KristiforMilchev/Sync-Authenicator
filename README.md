@@ -7,7 +7,8 @@ TBD
 
  ## What is the sync authentication protocol?
 
-![image](https://user-images.githubusercontent.com/49519924/208472736-22bf0485-49d1-4444-86ed-c396245a4732.png)
+![image](https://user-images.githubusercontent.com/49519924/208661505-ecf4503f-7c78-4a01-89c3-c90897997292.png)
+
 
 
 The sync authentication protocol is based on EVM compatible wallet signatures, unlike the traditional 2FA where we have a code that has to be confirmed, we base our authentication protocol on the foundations of the Ethereum protocol. The application contains a stripped down EVM compatible address that doesn't operate on the blockchain, but we use the existing cryptography to generate sign and confrim messages. Since in Ethreum every message that is signed by a generated private key always derives the public key of the original signer we can improve the existing 2FA security by elimitinating the guessing factor. With the current infrastructure when a 2FA based application generates a reqest with a code it cannot physically determine if the sender is the owner of that code, but only that the code matches the expected code. With the sync authenication protocol that issue is now solved, since each private key used to sign a message derives the public key of the wallet that signed it we can now safely accept and validate messages.
