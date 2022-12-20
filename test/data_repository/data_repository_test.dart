@@ -1,18 +1,14 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
-import 'package:synctest/application/services/data_repository.dart';
 import 'package:synctest/domain/databases/context_models/auth_connection.dart';
 import 'package:synctest/domain/databases/context_models/connection_attempt.dart';
-import 'package:synctest/domain/databases/database_context.dart';
 import 'package:synctest/infrastructure/idata_repository.dart';
-import 'package:synctest/infrastructure/idatabase_context.dart';
+
+import '../core/test_data.dart';
 
 void main() {
   late final IDataRepository repository;
-  var getIt = GetIt.instance;
-  getIt.registerSingleton<IDatabaseContext>(DatabaseContext());
-  getIt.registerSingleton<IDataRepository>(DataRepository("sync-auth-debug"));
-  repository = getIt.get<IDataRepository>();
+  TestsData testData = TestsData();
+  repository = testData.getIt.get<IDataRepository>();
 
   group('DataRepositoryTests -', () {
     test("AddAuthConnection", () async {

@@ -1,6 +1,5 @@
 import 'package:get_it/get_it.dart';
 import 'package:stacked/stacked.dart';
-import 'package:synctest/domain/databases/context_models/auth_connection.dart';
 import 'package:synctest/infrastructure/iauthentication.dart';
 import 'package:synctest/infrastructure/idata_repository.dart';
 import 'package:synctest/infrastructure/ipage_router_service.dart';
