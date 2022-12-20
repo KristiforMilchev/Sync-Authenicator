@@ -6,8 +6,9 @@ A web3 blockchain based Authenticator application built with Flutter for IOS and
 TBD 
 
  ## What is the sync authentication protocol?
+ 
+ ![image](https://user-images.githubusercontent.com/49519924/208663720-f3a5b6f8-09b1-4b18-b7fc-f64d4ea5085b.png)
 
-![image](https://user-images.githubusercontent.com/49519924/208661505-ecf4503f-7c78-4a01-89c3-c90897997292.png)
 
 
 
