@@ -30,7 +30,7 @@ class RemoveConnectionModal extends StatelessWidget {
                     backgroundColor: MaterialStateProperty.resolveWith(
                         (states) => ThemeColors.mainThemeBackground),
                   ),
-                  onPressed: (() => {}),
+                  onPressed: (() => model.removeItem(url, email)),
                   icon: Icon(
                     // <-- Icon
                     Icons.delete_forever,

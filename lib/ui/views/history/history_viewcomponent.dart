@@ -18,7 +18,7 @@ class HistoryViewModel extends BaseViewModel {
 
   //Getters
   AuthConnection? get selectedProvider => _selectedProvider;
-  get providers => _providers;
+  List<AuthConnection> get providers => _providers;
   List<ConnectionAttempt> get connectionAttempts => _connectionAttempts;
 
   initialise() async {

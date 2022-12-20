@@ -27,20 +27,23 @@ class ConnectionCardViewModel extends BaseViewModel {
           email: email,
         ),
         FlushbarPosition.TOP,
-        ThemeColors.cardBackground,
+        ThemeColors.mainThemeBackground,
         1,
         const BorderRadius.only(
             topLeft: Radius.circular(20), topRight: Radius.circular(20)),
         context,
-        "approveBox");
+        "removeBox");
   }
 
-  initDialog(String url, String accountName, BuildContext context) async {
+  initDialog(
+      bool isMain, String url, String accountName, BuildContext context) async {
     // ignore: use_build_context_synchronously
+    if (!isMain) return;
+
     _pageRouter.initActionDialog(
         SignatureRequestLoader(url: url, accountName: accountName),
         FlushbarPosition.BOTTOM,
-        ThemeColors.cardBackground,
+        ThemeColors.mainThemeBackground,
         1,
         const BorderRadius.only(
             topLeft: Radius.circular(20), topRight: Radius.circular(20)),
