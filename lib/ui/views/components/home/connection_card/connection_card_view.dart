@@ -21,7 +21,7 @@ class ConnectionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<ConnectionCardViewModel>.reactive(
       builder: (context, model, child) => InkWell(
-        onTap: () => model.initDialog(url!, email!, context),
+        onTap: () => model.initDialog(isMain, url!, email!, context),
         child: Column(
           children: [
             if (isMain)
