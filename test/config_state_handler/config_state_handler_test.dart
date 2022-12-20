@@ -1,26 +1,16 @@
 import 'package:encrypt/encrypt.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 
-import 'package:synctest/application/services/config_manager.dart';
-import 'package:synctest/application/services/data_repository.dart';
 import 'package:synctest/domain/databases/context_models/user_settings.dart';
-import 'package:synctest/domain/databases/database_context.dart';
 import 'package:synctest/infrastructure/iconfig_manager.dart';
-import 'package:synctest/infrastructure/idata_repository.dart';
-import 'package:synctest/infrastructure/idatabase_context.dart';
 
 import '../core/test_data.dart';
 
 void main() {
-  var getIt = GetIt.instance;
+  TestsData testData = TestsData();
 
-  getIt.registerSingleton<IDatabaseContext>(DatabaseContext());
-  getIt.registerSingleton<IDataRepository>(DataRepository("sync-auth-debug"));
-  getIt.registerSingleton<IConfigManager>(ConfigManager());
-
-  IConfigManager configManager = getIt.get<IConfigManager>();
+  IConfigManager configManager = testData.getIt.get<IConfigManager>();
   group('ConfigStateHandlerTest -', () {
     test("ImportNewConfig", () async {
       var config = await configManager.addNewConfig(
@@ -33,7 +23,7 @@ void main() {
       var state = await configManager.importConfiguration(
           UserSettings(
               "imported", Encrypted(Uint8List(2)).base64, DateTime.now()),
-          TestsData().connections);
+          testData.connections);
 
       expect(state, true, reason: "Importing existing account failed");
     });

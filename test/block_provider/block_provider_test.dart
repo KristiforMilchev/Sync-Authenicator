@@ -1,8 +1,5 @@
 import 'package:encrypt/encrypt.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
-
-import 'package:synctest/application/services/blockchain_provider.dart';
 
 import 'package:synctest/infrastructure/iblockchain_provider.dart';
 import 'package:web3dart/web3dart.dart';
@@ -11,9 +8,8 @@ import '../core/test_data.dart';
 
 void main() {
   late final IBlokchainProvider provider;
-  var getIt = GetIt.asNewInstance();
-  getIt.registerSingleton<IBlokchainProvider>(Blockchainprovider());
-  provider = getIt.get<IBlokchainProvider>();
+  TestsData testData = TestsData();
+  provider = testData.getIt.get<IBlokchainProvider>();
 
   group('BlockProviderTest -', () {
     group('Account Handling -', () {
@@ -30,7 +26,7 @@ void main() {
       });
 
       test("Recover account", () {
-        var getAccountData = TestsData().initTestWallet();
+        var getAccountData = testData.initTestWallet();
 
         var account = provider.recoverAccount(getAccountData.privateKey);
 
@@ -42,8 +38,8 @@ void main() {
 
   group("Encryption Handling", () {
     test("Encrypt account private key", () {
-      var privateKey = TestsData().privateKey;
-      var encryptionKey = TestsData().encryptionPassword;
+      var privateKey = testData.privateKey;
+      var encryptionKey = testData.encryptionPassword;
 
       var encrypted = provider.encryptPk(encryptionKey, privateKey);
 
@@ -52,9 +48,9 @@ void main() {
     });
 
     test("Recover encrypted private key", () {
-      var encrypted = Encrypted.fromBase64(TestsData().derivedBase64EncData);
-      var encryptionKey = TestsData().encryptionPassword;
-      var originalWallet = TestsData().initTestWallet();
+      var encrypted = Encrypted.fromBase64(testData.derivedBase64EncData);
+      var encryptionKey = testData.encryptionPassword;
+      var originalWallet = testData.initTestWallet();
 
       var decrypt = provider.getAccount(encryptionKey, encrypted);
 
@@ -64,10 +60,10 @@ void main() {
     });
 
     test("Sign simple messsage", () {
-      var originalWallet = TestsData().initTestWallet();
+      var originalWallet = testData.initTestWallet();
 
       var generatedSingnature =
-          provider.signData(TestsData().testMessage, originalWallet);
+          provider.signData(testData.testMessage, originalWallet);
 
       expect(generatedSingnature, isNot(null), reason: "Signature is null");
       expect(generatedSingnature, isNot(""),
@@ -80,7 +76,7 @@ void main() {
       var msg = TestsData().recordedTestSginature;
       var newRandomWallet = provider.createNewAccount();
 
-      var owner = provider.decodeSigned(msg, TestsData().testMessage);
+      var owner = provider.decodeSigned(msg, testData.testMessage);
 
       expect(originalWallet.publicAddress.toLowerCase(), owner.toLowerCase(),
           reason:

@@ -7,7 +7,6 @@ import 'package:synctest/infrastructure/iblockchain_provider.dart';
 import 'package:synctest/infrastructure/idata_repository.dart';
 
 import 'package:synctest/ui/views/history/history_viewcomponent.dart';
-import 'package:synctest/ui/views/home/home_view.dart';
 import 'package:synctest/ui/views/home/home_viewmodel.dart';
 
 import '../../domain/databases/context_models/auth_connection.dart';

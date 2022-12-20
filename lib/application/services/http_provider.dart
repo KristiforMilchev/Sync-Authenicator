@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_shadowing_type_parameters
+
 import 'dart:convert';
 
 import 'package:synctest/domain/models/http_request.dart';
