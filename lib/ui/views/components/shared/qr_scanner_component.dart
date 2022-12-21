@@ -5,17 +5,20 @@ import 'package:synctest/Assets/styles.dart';
 import 'package:synctest/ui/views/components/home/qr_auth_panel/qr_auth_panel.dart';
 
 class QRViewExample extends StatefulWidget {
-  const QRViewExample({Key? key}) : super(key: key);
+  final int type;
+
+  const QRViewExample({Key? key, required this.type}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _QRViewExampleState();
+  State<StatefulWidget> createState() => _QRViewExampleState(type);
 }
 
 class _QRViewExampleState extends State<QRViewExample> {
   Barcode? result;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
-
+  final int type;
+  _QRViewExampleState(this.type);
   // In order to get hot reload to work we need to pause the camera if the platform
   // is android, or resume the camera if the platform is iOS.
   @override
@@ -37,8 +40,8 @@ class _QRViewExampleState extends State<QRViewExample> {
             Expanded(flex: 4, child: _buildQrView(context)),
             QrAuthPanel(
               key: const Key("qrPanel"),
-              currentController: controller,
               currentResult: result,
+              type: type,
             )
           ],
         ),
@@ -56,7 +59,7 @@ class _QRViewExampleState extends State<QRViewExample> {
     // we need to listen for Flutter SizeChanged notification and update controller
     return QRView(
       key: qrKey,
-      onQRViewCreated: _onQRViewCreated,
+      onQRViewCreated: ((p0) => _onQRViewCreated(p0, context)),
       overlay: QrScannerOverlayShape(
           borderColor: ThemeColors.innerText,
           borderRadius: 10,
@@ -67,12 +70,14 @@ class _QRViewExampleState extends State<QRViewExample> {
     );
   }
 
-  void _onQRViewCreated(QRViewController controller) {
+  void _onQRViewCreated(QRViewController controller, BuildContext context) {
     setState(() {
       this.controller = controller;
       controller.resumeCamera();
+      QrAuthPanel.updateController(controller, context);
       //controller.flipCamera();
     });
+
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
