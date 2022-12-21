@@ -7,9 +7,12 @@ import 'package:synctest/ui/views/components/home/qr_auth_panel/qr_auth_panel_vi
 import '../../../../../Assets/styles.dart';
 
 class QrAuthPanel extends StatelessWidget {
-  final QRViewController? currentController;
+  static QRViewController? currentController;
   final Barcode? currentResult;
-  const QrAuthPanel({super.key, this.currentController, this.currentResult});
+  final int type;
+
+  const QrAuthPanel({super.key, this.currentResult, required this.type});
+  static QrAuthPanelViewModel? currentModel;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +34,24 @@ class QrAuthPanel extends StatelessWidget {
                         'Scan a code',
                         style: TextStyle(color: ThemeColors.mainText),
                       ),
+                    ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateColor.resolveWith(
+                              (states) => ThemeColors.cardBackground),
+                          foregroundColor: MaterialStateColor.resolveWith(
+                              (states) => ThemeColors.mainText),
+                        ),
+                        onPressed: () async {
+                          model.uploadFromGallery();
+                        },
+                        child: FutureBuilder(
+                          builder: (context, snapshot) {
+                            return const Text(
+                              'Upload from gallery',
+                              style: TextStyle(fontSize: 8),
+                            );
+                          },
+                        )),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -115,8 +136,18 @@ class QrAuthPanel extends StatelessWidget {
                 ),
               ),
             ),
-        viewModelBuilder: () => QrAuthPanelViewModel(),
+        viewModelBuilder: () {
+          var cModel = QrAuthPanelViewModel();
+          currentModel = cModel;
+          return cModel;
+        },
         onModelReady: (viewModel) =>
-            viewModel.initialise(currentController, currentResult));
+            viewModel.initialise(currentController, currentResult, type));
+  }
+
+  static void updateController(
+      QRViewController initialized, BuildContext currentContext) {
+    currentController = initialized;
+    currentModel?.initController(currentController, currentContext);
   }
 }

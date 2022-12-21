@@ -36,7 +36,7 @@ class BottomBarViewModel extends BaseViewModel {
     } else {
       // TODO comment this one for desktop testing
       var scanResult = await Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => const QRViewExample(),
+        builder: (context) => const QRViewExample(type: 2),
       ));
       // {"email":"poko@contoso.com","message":"e62df3c1e8b44ced8b3492d9eed73924","url":"http://localhost:7246"}
 

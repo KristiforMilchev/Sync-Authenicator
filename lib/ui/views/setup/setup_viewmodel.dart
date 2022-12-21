@@ -39,7 +39,7 @@ class SetupViewModel extends BaseViewModel {
       //Import existing account
       case 2:
         final result = await Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const QRViewExample(),
+          builder: (context) => const QRViewExample(type: 1),
         ));
         importAccount(result);
         break;
