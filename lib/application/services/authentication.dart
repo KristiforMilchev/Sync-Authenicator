@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:encrypt/encrypt.dart';
+import 'package:flutter/material.dart';
 import 'package:synctest/domain/databases/context_models/connection_attempt.dart';
 import 'package:synctest/infrastructure/iauthentication.dart';
 import 'package:synctest/infrastructure/iblockchain_provider.dart';
@@ -13,6 +14,7 @@ import '../../domain/databases/context_models/auth_connection.dart';
 import '../../domain/general_config.dart';
 import '../../domain/models/add_auth_connection.dart';
 import '../../domain/models/http_request.dart';
+import '../../domain/models/import_settings.dart';
 import '../../infrastructure/ihttp_provider_service.dart';
 
 class Authentication implements IAuthentication {
@@ -131,5 +133,35 @@ class Authentication implements IAuthentication {
   @override
   void connectionRemoved(AuthConnection connection) {
     homeModel!.connectionRemoved(connection);
+  }
+
+  @override
+  bool isValidAuthConnection(String current, BuildContext context) {
+    try {
+      AddAuthConnection.fromJson(jsonDecode(current));
+      return true;
+    } catch (e) {
+      printMessage(
+          "Qr code rejected, doesn't match the expected data model", context);
+      return false;
+    }
+  }
+
+  @override
+  bool isValidImportSetting(String current, BuildContext context) {
+    try {
+      ImportSettings.fromJson(jsonDecode(current));
+      return true;
+    } catch (e) {
+      printMessage(
+          "Qr code rejected, doesn't match the expected data model", context);
+      return false;
+    }
+  }
+
+  void printMessage(String message, BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
   }
 }

@@ -20,7 +20,10 @@ class RemoveConnectionModal extends StatelessWidget {
                   "Do you really want to remove the connection?",
                   style: TextStyle(color: ThemeColors.mainText),
                 ),
-                Text(url),
+                Text(
+                  url,
+                  style: TextStyle(color: ThemeColors.innerText),
+                ),
                 Text(
                   "For account: $email",
                   style: TextStyle(color: ThemeColors.mainText),

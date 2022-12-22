@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get_it/get_it.dart';
 import 'package:stacked/stacked.dart';
+import 'package:synctest/infrastructure/iauthentication.dart';
 
 import 'package:synctest/infrastructure/iblockchain_provider.dart';
 import 'package:synctest/infrastructure/iconfig_manager.dart';
@@ -12,7 +13,6 @@ import 'package:synctest/infrastructure/ipage_router_service.dart';
 
 import '../../../domain/databases/context_models/user_settings.dart';
 import '../../../domain/general_config.dart';
-import '../components/shared/qr_scanner_component.dart';
 
 class SetupViewModel extends BaseViewModel {
   GetIt getIt = GetIt.instance;
@@ -20,6 +20,7 @@ class SetupViewModel extends BaseViewModel {
   late IBlokchainProvider blockchainProvider;
   late IPageRouterService router;
   late PageController _controller;
+  late IAuthentication _authentication;
   PageController get controller => _controller;
 
   void initialise() async {
@@ -38,10 +39,8 @@ class SetupViewModel extends BaseViewModel {
     switch (action) {
       //Import existing account
       case 2:
-        final result = await Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const QRViewExample(type: 1),
-        ));
-        importAccount(result);
+        router.callbackResult = this;
+        router.changePage("/qr-scanner-view");
         break;
 
       //Create new account

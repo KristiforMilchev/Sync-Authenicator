@@ -21,6 +21,9 @@ class PageRouterService implements IPageRouterService {
   late int currentIndex = 0;
 
   @override
+  late Object? callbackResult;
+
+  @override
   backToPrevious(BuildContext context, dynamic result) {
     Navigator.pop(context, result);
   }
@@ -62,5 +65,10 @@ class PageRouterService implements IPageRouterService {
   @override
   void dismissActionDialog(String id) {
     model.dismissActionDialog(id);
+  }
+
+  @override
+  void setCallbackResult(Object current) {
+    callbackResult = current;
   }
 }

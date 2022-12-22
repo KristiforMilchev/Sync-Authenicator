@@ -15,6 +15,7 @@ class HomeViewModel extends BaseViewModel {
     _cards = await repository.getEnabledConnections();
     _authentication = getIt.get<IAuthentication>();
     _authentication.bindHomeModels(this);
+
     notifyListeners();
   }
 

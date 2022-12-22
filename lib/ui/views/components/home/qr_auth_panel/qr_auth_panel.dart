@@ -3,15 +3,14 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:flutter/foundation.dart';
 import 'package:stacked/stacked.dart';
 import 'package:synctest/ui/views/components/home/qr_auth_panel/qr_auth_panel_viewmodel.dart';
+import 'package:synctest/ui/views/components/qr_scanner/qr_scanner_viewmodel.dart';
 
 import '../../../../../Assets/styles.dart';
 
 class QrAuthPanel extends StatelessWidget {
-  static QRViewController? currentController;
-  final Barcode? currentResult;
-  final int type;
+  late QrScannerViewmodel parent;
 
-  const QrAuthPanel({super.key, this.currentResult, required this.type});
+  QrAuthPanel({super.key, required this.parent});
   static QrAuthPanelViewModel? currentModel;
 
   @override
@@ -24,9 +23,9 @@ class QrAuthPanel extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    if (currentResult != null)
+                    if (parent.result != null)
                       Text(
-                        'Barcode Type: ${describeEnum(currentResult!.format)} Data: ${currentResult!.code}',
+                        'Barcode Type: ${describeEnum(parent.result!.format)} Data: ${parent.result!.code}',
                         style: TextStyle(color: ThemeColors.mainText),
                       )
                     else
@@ -87,11 +86,11 @@ class QrAuthPanel extends StatelessWidget {
                                     (states) => ThemeColors.mainText),
                               ),
                               onPressed: () async {
-                                await currentController?.toggleFlash();
+                                await parent.controller?.toggleFlash();
                                 model.notifyListeners();
                               },
                               child: FutureBuilder(
-                                future: currentController?.getFlashStatus(),
+                                future: parent.controller?.getFlashStatus(),
                                 builder: (context, snapshot) {
                                   return Text(
                                     'Flash: ${snapshot.data}',
@@ -110,11 +109,11 @@ class QrAuthPanel extends StatelessWidget {
                                     (states) => ThemeColors.mainText),
                               ),
                               onPressed: () async {
-                                await currentController?.flipCamera();
+                                await parent.controller?.flipCamera();
                                 model.notifyListeners();
                               },
                               child: FutureBuilder(
-                                future: currentController?.getCameraInfo(),
+                                future: parent.controller?.getCameraInfo(),
                                 builder: (context, snapshot) {
                                   if (snapshot.data != null) {
                                     return Text(
@@ -141,13 +140,6 @@ class QrAuthPanel extends StatelessWidget {
           currentModel = cModel;
           return cModel;
         },
-        onModelReady: (viewModel) =>
-            viewModel.initialise(currentController, currentResult, type));
-  }
-
-  static void updateController(
-      QRViewController initialized, BuildContext currentContext) {
-    currentController = initialized;
-    currentModel?.initController(currentController, currentContext);
+        onModelReady: (viewModel) => viewModel.initialise(parent, context));
   }
 }
