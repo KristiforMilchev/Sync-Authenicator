@@ -6,6 +6,8 @@ import 'application/locator.dart';
 import 'application/router.gr.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   await Hive.initFlutter();
 
   registerDependency();

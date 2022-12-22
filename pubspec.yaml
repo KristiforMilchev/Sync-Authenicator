@@ -60,6 +60,7 @@ dependencies:
   qr_code_scanner: 
     path: /home/kristifor/Projects/qrscanner/
   lean_file_picker: ^0.0.2
+  google_mobile_ads: ^2.3.0
  
 
 dev_dependencies:

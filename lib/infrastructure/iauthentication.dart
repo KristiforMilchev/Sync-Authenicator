@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:synctest/domain/databases/context_models/auth_connection.dart';
 
 import '../ui/views/history/history_viewcomponent.dart';
@@ -11,4 +12,6 @@ abstract class IAuthentication {
   void connectionRemoved(AuthConnection connection);
   void bindHistoryModel(HistoryViewModel model);
   void bindHomeModels(HomeViewModel model);
+  bool isValidAuthConnection(String current, BuildContext context);
+  bool isValidImportSetting(String current, BuildContext context);
 }

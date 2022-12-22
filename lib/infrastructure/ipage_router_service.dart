@@ -9,6 +9,7 @@ abstract class IPageRouterService {
   late AppRouteViewModel model;
   late MaterialApp appView;
   late int currentIndex;
+  late Object? callbackResult;
 
   void registerRouter(
       AppRouter router, AppRouteViewModel currentModel, MaterialApp app);
@@ -19,4 +20,5 @@ abstract class IPageRouterService {
   void initActionDialog(Widget render, FlushbarPosition position, Color color,
       double border, BorderRadius radius, BuildContext context, String id);
   void dismissActionDialog(String id);
+  void setCallbackResult(Object current);
 }
