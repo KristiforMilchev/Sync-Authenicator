@@ -4,8 +4,6 @@ import 'package:synctest/domain/databases/context_models/auth_connection.dart';
 import 'package:synctest/infrastructure/iauthentication.dart';
 import 'package:synctest/infrastructure/idata_repository.dart';
 
-import '../../../infrastructure/iadvertisment.dart';
-
 class HomeViewModel extends BaseViewModel {
   List<AuthConnection> _cards = [];
   GetIt getIt = GetIt.instance;
@@ -18,9 +16,6 @@ class HomeViewModel extends BaseViewModel {
     _authentication = getIt.get<IAuthentication>();
     _authentication.bindHomeModels(this);
 
-    // var adService = getIt.get<IAdvertisment>();
-    // adService.loadAd();
-    // adService.interstitialAd.show();
     notifyListeners();
   }
 

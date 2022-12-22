@@ -1,103 +1,90 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:lean_file_picker/lean_file_picker.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:stacked/stacked.dart';
-import 'package:synctest/domain/databases/context_models/auth_connection.dart';
-import 'package:synctest/domain/models/import_settings.dart';
-
-import '../../../../../domain/models/add_auth_connection.dart';
+import 'package:synctest/infrastructure/iadvertisment.dart';
+import 'package:synctest/infrastructure/iauthentication.dart';
+import 'package:synctest/infrastructure/ipage_router_service.dart';
+import 'package:synctest/ui/views/components/qr_scanner/qr_scanner_viewmodel.dart';
+import 'package:synctest/ui/views/setup/setup_viewmodel.dart';
 
 class QrAuthPanelViewModel extends BaseViewModel {
-  QRViewController? controller;
-  Barcode? result;
+  GetIt getIt = GetIt.instance;
+
+  late QrScannerViewmodel _parent;
   BuildContext? context;
-  late int type;
 
-  initialise(QRViewController? currentController, Barcode? currentResult,
-      int currentType) async {
-    controller = currentController;
-    result = currentResult;
-    type = currentType;
-    controller?.scannedDataStream.listen((scanData) {
-      result = scanData;
-      //Implement business logic for binding auth...
-      notifyListeners();
-    });
+  late IAuthentication _authentication;
+  late IAdvertisment _advertisment;
+  late IPageRouterService _router;
 
-    await controller?.flipCamera();
-  }
-
-  @override
-  void dispose() {
-    controller?.dispose();
-    super.dispose();
+  initialise(QrScannerViewmodel parent, BuildContext currentContext) async {
+    _authentication = getIt.get<IAuthentication>();
+    _advertisment = getIt.get<IAdvertisment>();
+    _router = getIt.get<IPageRouterService>();
+    _parent = parent;
+    context = currentContext;
   }
 
   toggleFlash() async {
-    await controller?.toggleFlash();
+    await _parent.controller?.toggleFlash();
   }
 
   Future<bool?> getFlashStatus() async {
-    return await controller?.getFlashStatus();
+    return await _parent.controller?.getFlashStatus();
   }
 
   flipCamera() async {
-    await controller?.flipCamera();
+    await _parent.controller?.flipCamera();
     notifyListeners();
   }
 
   Future<void> uploadFromGallery() async {
     final file = await pickFile(
       allowedExtensions: ['zip'],
-      allowedMimeTypes: ['image/jpeg', 'text/*'],
+      allowedMimeTypes: ['image/jpeg', 'image/png'],
     );
     if (file != null) {
-      List<String>? result = await controller?.scanQrcodeFromImage(file.path);
+      List<String>? result =
+          await _parent.controller?.scanQrcodeFromImage(file.path);
       // ignore: avoid_print
       print(result?.first);
 
-      switch (type) {
-        case 1:
-          testUserSettings(result);
-          break;
-        case 2:
-          testAuthConnection(result);
-          break;
+      if (_router.callbackResult != null &&
+          _router.callbackResult is SetupViewModel) {
+        testUserSettings(result);
+      } else {
+        testAuthConnection(result);
       }
     }
   }
 
-  void testAuthConnection(List<String>? result) {
-    try {
-      AddAuthConnection.fromJson(jsonDecode(result!.first));
-      Navigator.pop(context!, result.first);
-      // ignore: empty_catches
-    } catch (e) {
-      printMessage("Qr code rejected, doesn't match the expected data model");
+  void testAuthConnection(List<String>? result) async {
+    var isValid =
+        _authentication.isValidAuthConnection(result!.first, context!);
+    if (isValid) {
+      var paired = await _authentication.pairEndpoint(result.first);
+      if (paired) {
+        _advertisment.interstitialAd.show();
+        _advertisment.loadAd();
+        var callback = _router.callbackResult as bool;
+        if (callback) {
+          _router.callbackResult = null;
+          _router.changePage("/home-view");
+        } else {
+          _router.callbackResult = null;
+          _router.changePage("/history-view");
+        }
+      }
     }
   }
 
   void testUserSettings(List<String>? result) {
-    try {
-      ImportSettings.fromJson(jsonDecode(result!.first));
-      Navigator.pop(context!, result.first);
-      // ignore: empty_catches
-    } catch (e) {
-      printMessage("Qr code rejected, doesn't match the expected data model");
+    var isValid = _authentication.isValidImportSetting(result!.first, context!);
+    if (isValid) {
+      var callback = _router.callbackResult as SetupViewModel;
+      callback.importAccount(result.first);
     }
-  }
-
-  void printMessage(String message) {
-    ScaffoldMessenger.of(context!).showSnackBar(
-      SnackBar(content: Text(message)),
-    );
-  }
-
-  void initController(
-      QRViewController? currentController, BuildContext context) {
-    // ignore: unnecessary_this
-    this.controller = currentController;
-    this.context = context;
   }
 }
