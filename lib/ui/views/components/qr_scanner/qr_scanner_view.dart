@@ -22,7 +22,7 @@ class QrScannerView extends StatelessWidget {
         ),
       ),
       viewModelBuilder: () => QrScannerViewmodel(),
-      onModelReady: (viewModel) => viewModel.initialisedModel(),
+      onModelReady: (viewModel) => viewModel.initialisedModel(context),
     );
   }
 }

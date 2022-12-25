@@ -21,4 +21,5 @@ abstract class IPageRouterService {
       double border, BorderRadius radius, BuildContext context, String id);
   void dismissActionDialog(String id);
   void setCallbackResult(Object current);
+  void printErrorMessage(String message, BuildContext context, int timeout);
 }
