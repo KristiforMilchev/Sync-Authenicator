@@ -19,6 +19,13 @@ class QrAuthPanelViewModel extends BaseViewModel {
   late IAdvertisment _advertisment;
   late IPageRouterService _router;
 
+  bool _isFlashOn = false;
+  bool _isCameraFront = false;
+  IconData _iconFlashStatus = Icons.flash_off;
+  IconData? get iconFlashStatus => _iconFlashStatus;
+  IconData _iconCameraSatus = Icons.camera_rear;
+  IconData? get iconCameraStatus => _iconCameraSatus;
+
   initialise(QrScannerViewmodel parent, BuildContext currentContext) async {
     _authentication = getIt.get<IAuthentication>();
     _advertisment = getIt.get<IAdvertisment>();
@@ -29,6 +36,14 @@ class QrAuthPanelViewModel extends BaseViewModel {
 
   toggleFlash() async {
     await _parent.controller?.toggleFlash();
+    _isFlashOn = _isFlashOn == true ? false : true;
+    if (_isFlashOn) {
+      _iconFlashStatus = Icons.flash_on;
+    } else {
+      _iconFlashStatus = Icons.flash_off;
+    }
+
+    notifyListeners();
   }
 
   Future<bool?> getFlashStatus() async {
@@ -86,5 +101,16 @@ class QrAuthPanelViewModel extends BaseViewModel {
       var callback = _router.callbackResult as SetupViewModel;
       callback.importAccount(result.first);
     }
+  }
+
+  toggleCamera() async {
+    await _parent.controller?.flipCamera();
+    _isCameraFront = _isCameraFront == false ? true : false;
+    if (_isCameraFront) {
+      _iconCameraSatus = Icons.camera_front;
+    } else {
+      _iconCameraSatus = Icons.camera_rear;
+    }
+    notifyListeners();
   }
 }
