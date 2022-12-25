@@ -1,16 +1,14 @@
 import 'dart:convert';
-
+import 'package:another_flushbar/flushbar.dart';
 import 'package:eth_sig_util/util/utils.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get_it/get_it.dart';
 import 'package:stacked/stacked.dart';
 import 'package:synctest/infrastructure/iauthentication.dart';
-
 import 'package:synctest/infrastructure/iblockchain_provider.dart';
 import 'package:synctest/infrastructure/iconfig_manager.dart';
 import 'package:synctest/infrastructure/ipage_router_service.dart';
-
+import '../../../Assets/styles.dart';
 import '../../../domain/databases/context_models/user_settings.dart';
 import '../../../domain/general_config.dart';
 
@@ -22,8 +20,10 @@ class SetupViewModel extends BaseViewModel {
   late PageController _controller;
   late IAuthentication _authentication;
   PageController get controller => _controller;
+  late BuildContext _context;
 
-  void initialise() async {
+  void initialise(BuildContext context) async {
+    _context = context;
     _controller = PageController(initialPage: 1);
     configManager = getIt.get<IConfigManager>();
     blockchainProvider = getIt.get<IBlokchainProvider>();
@@ -51,15 +51,20 @@ class SetupViewModel extends BaseViewModel {
   }
 
   void importAccount(String result) {
-    var map = json.encode(result);
+    try {
+      var map = json.encode(result);
 
-    var parsedString = json.decode(map);
+      var parsedString = json.decode(map);
 
-    if (parsedString.userSettings.address.isNotEmpty) {
-      configManager.importConfiguration(
-          parsedString.userSettings, parsedString.connections);
+      if (parsedString.userSettings.address.isNotEmpty) {
+        configManager.importConfiguration(
+            parsedString.userSettings, parsedString.connections);
+      }
+      router.changePage("/home-view");
+    } catch (ex) {
+      router.printErrorMessage(
+          "Import account failed, invalid QR code.", _context, 5);
     }
-    router.changePage("/home-view");
   }
 
   void createNewAccount() async {

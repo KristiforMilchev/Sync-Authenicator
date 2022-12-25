@@ -1,13 +1,15 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:lean_file_picker/lean_file_picker.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:stacked/stacked.dart';
 import 'package:synctest/infrastructure/iadvertisment.dart';
 import 'package:synctest/infrastructure/iauthentication.dart';
 import 'package:synctest/infrastructure/ipage_router_service.dart';
 import 'package:synctest/ui/views/components/qr_scanner/qr_scanner_viewmodel.dart';
 import 'package:synctest/ui/views/setup/setup_viewmodel.dart';
+
+import '../../../../../Assets/styles.dart';
 
 class QrAuthPanelViewModel extends BaseViewModel {
   GetIt getIt = GetIt.instance;
@@ -21,7 +23,7 @@ class QrAuthPanelViewModel extends BaseViewModel {
 
   bool _isFlashOn = false;
   bool _isCameraFront = false;
-  IconData _iconFlashStatus = Icons.flash_off;
+  IconData _iconFlashStatus = Icons.flash_on;
   IconData? get iconFlashStatus => _iconFlashStatus;
   IconData _iconCameraSatus = Icons.camera_rear;
   IconData? get iconCameraStatus => _iconCameraSatus;
@@ -38,9 +40,9 @@ class QrAuthPanelViewModel extends BaseViewModel {
     await _parent.controller?.toggleFlash();
     _isFlashOn = _isFlashOn == true ? false : true;
     if (_isFlashOn) {
-      _iconFlashStatus = Icons.flash_on;
-    } else {
       _iconFlashStatus = Icons.flash_off;
+    } else {
+      _iconFlashStatus = Icons.flash_on;
     }
 
     notifyListeners();
@@ -92,6 +94,9 @@ class QrAuthPanelViewModel extends BaseViewModel {
           _router.changePage("/history-view");
         }
       }
+    } else {
+      _router.printErrorMessage(
+          "Failed to create connection. Qr code is invalid", context!, 5);
     }
   }
 
@@ -100,6 +105,8 @@ class QrAuthPanelViewModel extends BaseViewModel {
     if (isValid) {
       var callback = _router.callbackResult as SetupViewModel;
       callback.importAccount(result.first);
+    } else {
+      _router.printErrorMessage("Qr code is invalid", context!, 5);
     }
   }
 

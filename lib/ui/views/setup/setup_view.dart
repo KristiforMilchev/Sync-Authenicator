@@ -40,7 +40,7 @@ class SetupView extends StatelessWidget {
         ),
       ),
       viewModelBuilder: () => SetupViewModel(),
-      onModelReady: (viewModel) => viewModel.initialise(),
+      onModelReady: (viewModel) => viewModel.initialise(context),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -18,8 +19,10 @@ class QrScannerViewmodel extends BaseViewModel {
   late IAuthentication _authentication;
   late IAdvertisment _advertisment;
   late IPageRouterService _router;
+  late BuildContext _context;
 
-  initialisedModel() {
+  initialisedModel(BuildContext context) {
+    _context = context;
     _authentication = getIt.get<IAuthentication>();
     _advertisment = getIt.get<IAdvertisment>();
     _router = getIt.get<IPageRouterService>();
@@ -96,6 +99,8 @@ class QrScannerViewmodel extends BaseViewModel {
         _advertisment.interstitialAd.show();
         _advertisment.loadAd();
       }
+    } else {
+      _router.printErrorMessage("Qr code is not valid", context, 5);
     }
   }
 

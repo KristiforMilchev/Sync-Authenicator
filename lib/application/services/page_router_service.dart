@@ -8,6 +8,8 @@ import 'package:synctest/application/router.gr.dart';
 
 import 'package:synctest/infrastructure/ipage_router_service.dart';
 
+import '../../Assets/styles.dart';
+
 class PageRouterService implements IPageRouterService {
   @override
   late AppRouter router;
@@ -70,5 +72,26 @@ class PageRouterService implements IPageRouterService {
   @override
   void setCallbackResult(Object current) {
     callbackResult = current;
+  }
+
+  @override
+  void printErrorMessage(String message, BuildContext context, int timeout) {
+    initActionDialog(
+        Text(
+          "Qr code is not valid",
+          style: TextStyle(
+            color: ThemeColors.mainText,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        FlushbarPosition.TOP,
+        ThemeColors.mainThemeBackground,
+        1,
+        const BorderRadius.only(
+            topLeft: Radius.circular(0), topRight: Radius.circular(0)),
+        context,
+        "errorBox");
+    Future.delayed(Duration(seconds: timeout))
+        .then((value) => dismissActionDialog("errorBox"));
   }
 }

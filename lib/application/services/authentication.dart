@@ -141,8 +141,6 @@ class Authentication implements IAuthentication {
       AddAuthConnection.fromJson(jsonDecode(current));
       return true;
     } catch (e) {
-      printMessage(
-          "Qr code rejected, doesn't match the expected data model", context);
       return false;
     }
   }
@@ -153,15 +151,7 @@ class Authentication implements IAuthentication {
       ImportSettings.fromJson(jsonDecode(current));
       return true;
     } catch (e) {
-      printMessage(
-          "Qr code rejected, doesn't match the expected data model", context);
       return false;
     }
-  }
-
-  void printMessage(String message, BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message)),
-    );
   }
 }
