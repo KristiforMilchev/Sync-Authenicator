@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -19,16 +18,16 @@ class QrScannerViewmodel extends BaseViewModel {
   late IAuthentication _authentication;
   late IAdvertisment _advertisment;
   late IPageRouterService _router;
-  late BuildContext _context;
+  late bool isDisposed;
 
   initialisedModel(BuildContext context) {
-    _context = context;
     _authentication = getIt.get<IAuthentication>();
     _advertisment = getIt.get<IAdvertisment>();
     _router = getIt.get<IPageRouterService>();
   }
 
   buildQrView(BuildContext context) {
+    isDisposed = false;
     // For this example we check how width or tall the device is and change the scanArea and overlay accordingly.
     var scanArea = (MediaQuery.of(context).size.width < 400 ||
             MediaQuery.of(context).size.height < 400)
@@ -59,7 +58,7 @@ class QrScannerViewmodel extends BaseViewModel {
     controller.scannedDataStream.listen((scanData) async {
       result = scanData;
 
-      checkScanResult(result.toString(), context);
+      checkScanResult(result?.code, context);
 
       notifyListeners();
     });
@@ -73,20 +72,24 @@ class QrScannerViewmodel extends BaseViewModel {
     }
   }
 
-  void checkScanResult(String result, BuildContext context) {
-    disposeModel();
+  void checkScanResult(String? result, BuildContext context) {
     var caller = _router.callbackResult as bool;
     if (caller) {
-      tryPairConnection(result, context);
+      tryPairConnection(result!, context);
       _router.changePage("/home-view");
+      disposeModel();
     } else {
-      tryPairConnection(result, context);
+      tryPairConnection(result!, context);
       _router.changePage("/history-view");
+      disposeModel();
     }
+
+    if (isDisposed) return;
 
     if (_router.callbackResult is SetupViewModel) {
       var callback = _router.callbackResult as SetupViewModel;
       callback.importAccount(result);
+      disposeModel();
     }
   }
 
@@ -108,5 +111,6 @@ class QrScannerViewmodel extends BaseViewModel {
     controller?.stopCamera();
     controller?.dispose();
     _router.callbackResult = null;
+    isDisposed = true;
   }
 }
