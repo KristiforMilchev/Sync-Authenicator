@@ -31,6 +31,13 @@ class Authentication implements IAuthentication {
   Future<bool> pairEndpoint(String scanData) async {
     var connectionDetails = AddAuthConnection.fromJson(jsonDecode(scanData));
 
+    var exist = await repository.getConnectionsByEmailUrl(
+        connectionDetails.email, connectionDetails.url);
+
+    if (exist != null) {
+      return false;
+    }
+
     var userSettings = await repository.getSettings();
 
     var wallet = blockchainProvider.getAccount(

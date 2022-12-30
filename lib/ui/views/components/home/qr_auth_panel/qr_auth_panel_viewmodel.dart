@@ -93,6 +93,8 @@ class QrAuthPanelViewModel extends BaseViewModel {
           _router.callbackResult = null;
           _router.changePage("/history-view");
         }
+      } else {
+        _router.printErrorMessage("Connection already exists.", context!, 5);
       }
     } else {
       _router.printErrorMessage(
