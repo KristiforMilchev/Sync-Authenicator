@@ -103,7 +103,8 @@ class QrScannerViewmodel extends BaseViewModel {
         _advertisment.loadAd();
       }
     } else {
-      _router.printErrorMessage("Qr code is not valid", context, 5);
+      _router.printErrorMessage(
+          "Qr code is not valid or already exist", context, 5);
     }
   }
 

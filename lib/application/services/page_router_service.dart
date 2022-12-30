@@ -78,7 +78,7 @@ class PageRouterService implements IPageRouterService {
   void printErrorMessage(String message, BuildContext context, int timeout) {
     initActionDialog(
         Text(
-          "Qr code is not valid",
+          message,
           style: TextStyle(
             color: ThemeColors.mainText,
           ),
